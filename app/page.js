@@ -1,12 +1,22 @@
 import { Box } from "@mui/material";
 import { Header } from "@/components/Header";
+import { Navbar } from "@/components/Navbar";
+import ImageContent from "@/components/ImageContent";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <Box>
+      <Navbar />
       <Box>
         <Header />
       </Box>
-    </main>
+      <Box>
+        <ImageContent />
+      </Box>
+      <Box>
+        <Footer />
+      </Box>
+    </Box>
   );
 }
