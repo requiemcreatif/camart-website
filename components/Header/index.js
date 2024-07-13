@@ -1,37 +1,52 @@
+import Image from "next/image";
 import { Container, Box } from "@mui/material";
+import CamartLogo from "../../public/images/cam_art_logo_white.png";
 import {
   HeaderWrapper,
   CamartTitle,
   CamartIntroText,
+  CamartIntro,
   HeaderContainer,
+  ImageContainer,
+  HeaderButtonContainer,
+  HeaderButton,
 } from "./styles";
 
 export const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <Box
-          sx={{
-            padding: "10px",
-          }}
-        >
-          <CamartTitle variant="h2">Cam Art</CamartTitle>
-        </Box>
+        <ImageContainer>
+          <Image
+            src={CamartLogo}
+            alt="Cam Art Logo"
+            width={250}
+            height={200}
+            layout="responsive"
+          />
+        </ImageContainer>
         <Box
           sx={{
             padding: "20px",
           }}
         >
+          <CamartIntro>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </CamartIntro>
           <CamartIntroText>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            En Cam Art Booking, tenemos actualmente a varios artistas del mundo
+            del Hip-hop/Reggae. Os dejamos sus distintos apartados
+            profesionales, donde podréis ver su trayectoria y saber más sobre
+            ellos y su música. Nuestro equipo estará encantado de resolver
+            vuestras dudas y preguntas. Contratando un artista Cam Art, estarás
+            impulsando un movimiento,la cultura y un espectáculo digno de ver
+            cómo es "Cam Art Festival" ¿Quieres a algún artista de nuestra
+            agenda? Contáctanos.
           </CamartIntroText>
         </Box>
+        <HeaderButtonContainer>
+          <HeaderButton>Contáctanos</HeaderButton>
+        </HeaderButtonContainer>
       </HeaderContainer>
     </HeaderWrapper>
   );
