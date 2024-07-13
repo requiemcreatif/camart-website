@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   Dialog,
@@ -30,8 +30,20 @@ const darkTheme = createTheme({
 });
 
 const NewsletterPopup = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [hasShown, setHasShown] = useState(false);
+
+  useEffect(() => {
+    if (!hasShown) {
+      const timer = setTimeout(() => {
+        setOpen(true);
+        setHasShown(true);
+      }, 10000); // 5000 milliseconds = 5 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [hasShown]);
 
   const handleClose = () => {
     setOpen(false);
