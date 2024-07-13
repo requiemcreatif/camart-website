@@ -26,7 +26,7 @@ const ArtistSection = () => {
   const [hoveredArtist, setHoveredArtist] = useState(null);
 
   return (
-    <ArtistSectionWrapper>
+    <ArtistSectionWrapper id="menu-about">
       <Container /*maxWidth="lg"*/ sx={{ mt: 3 }}>
         <ArtistSectionTitle variant="h4">ARTISTAS CAMART</ArtistSectionTitle>
         {Object.entries(ArtistBio).map(([key, artist]) => (

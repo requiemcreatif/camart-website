@@ -18,7 +18,7 @@ import {
 export const Header = () => {
   console.log("CamHeroImage.src: ", CamHeroImage.src);
   return (
-    <HeaderWrapper>
+    <HeaderWrapper id="menu-home">
       {/* <BackgroundImageWrapper>
         <Image
           src={CamHeroImage}

@@ -16,6 +16,7 @@ export const ArtistSectionWrapper = styled(Box)`
 export const ArtistSectionTitle = styled(Typography)`
   color: #fff;
   margin-bottom: 32px;
+  font-weight: 700;
 `;
 
 export const ArtistSectionCard = styled(Box)`

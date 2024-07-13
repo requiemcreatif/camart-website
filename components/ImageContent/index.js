@@ -46,6 +46,30 @@ const cardData = [
     description:
       "En Cam Art Booking, tenemos actualmente a varios artistas del mundo...",
   },
+  {
+    id: 6,
+    image: "/images/cam415.jpg",
+    date: "Jul 20, 2024",
+    title: "Lorem ipsum dolor sit amet, consectetur.",
+    description:
+      "En Cam Art Booking, tenemos actualmente a varios artistas del mundo...",
+  },
+  {
+    id: 7,
+    image: "/images/cam204.jpg",
+    date: "Jul 20, 2024",
+    title: "Lorem ipsum dolor sit amet, consectetur.",
+    description:
+      "En Cam Art Booking, tenemos actualmente a varios artistas del mundo...",
+  },
+  {
+    id: 8,
+    image: "/images/cam95.jpg",
+    date: "Jul 20, 2024",
+    title: "Lorem ipsum dolor sit amet, consectetur.",
+    description:
+      "En Cam Art Booking, tenemos actualmente a varios artistas del mundo...",
+  },
   // ... Add data for other cards
 ];
 
@@ -59,10 +83,18 @@ export default function ImageContent() {
   };
 
   return (
-    <ImageContentWrapper>
-      <Container /*maxWidth="xl"*/>
-        <Typography variant="h4" sx={{ mb: 4, textAlign: "center" }}>
-          Ultimas Noticias
+    <ImageContentWrapper id="menu-noticias">
+      <Container
+        /*maxWidth="xl"*/ sx={{
+          mt: 4,
+          mb: 4,
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{ mb: 4 /*textAlign: "center"*/, fontWeight: 700 }}
+        >
+          ULTIMAS NOTICIAS
         </Typography>
         <ImageContainer>
           <AnimatePresence>

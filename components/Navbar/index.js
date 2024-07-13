@@ -41,7 +41,24 @@ export const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const menuItems = ["Home", "About", "Noticias", "Contacto"];
+  const handleLinkClick = (event, id) => {
+    event.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsMobileMenuOpen(false);
+    } else {
+      console.error(`Element with id ${id} not found.`);
+    }
+  };
+
+  const menuItems = [
+    { id: "menu-home", label: "Home" },
+    { id: "menu-about", label: "About" },
+    { id: "menu-noticias", label: "Noticias" },
+    { id: "menu-contacto", label: "Contacto" },
+  ];
+
   const iconColor = isScrolled ? "#000000" : "#ffffff";
 
   return (
@@ -61,9 +78,14 @@ export const Navbar = () => {
           </NavLogo>
           <DesktopMenu>
             {menuItems.map((item) => (
-              <li key={item}>
+              <li key={item.id}>
                 <NavLink isscrolled={isScrolled.toString()}>
-                  <Link href="#">{item}</Link>
+                  <Link
+                    href={`#${item.id}`}
+                    onClick={(e) => handleLinkClick(e, item.id)}
+                  >
+                    {item.label}
+                  </Link>
                 </NavLink>
               </li>
             ))}
@@ -96,9 +118,12 @@ export const Navbar = () => {
         </IconButton>
         <MobileMenuList>
           {menuItems.map((item) => (
-            <MobileMenuItem key={item} isscrolled={isScrolled.toString()}>
-              <Link href="#" onClick={toggleMobileMenu}>
-                {item}
+            <MobileMenuItem key={item.id} isscrolled={isScrolled.toString()}>
+              <Link
+                href={`#${item.id}`}
+                onClick={(e) => handleLinkClick(e, item.id)}
+              >
+                {item.label}
               </Link>
             </MobileMenuItem>
           ))}

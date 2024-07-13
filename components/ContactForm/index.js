@@ -25,6 +25,7 @@ const ContactForm = () => {
         //padding: "40px 0",
         color: "#9f9fa4",
       }}
+      id="menu-contacto"
     >
       <ContactFormWrapper>
         <Box>
