@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
   IconButton,
+  IconButtonProps,
 } from "@mui/material";
 
 export const ArtistSectionWrapper = styled(Box)`
@@ -82,7 +83,7 @@ export const ReadMoreButton = styled(Button)`
   }
 `;
 
-export const SocialIconButton = styled(IconButton)`
+export const SocialIconButton = styled(IconButton)<IconButtonProps>`
   color: #1976d2;
   margin-left: 8px;
 `;

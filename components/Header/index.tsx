@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { Container, Box, Typography, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { motion } from "framer-motion";
-import CamartLogo from "../../public/images/cam_art_logo_white.png";
-import CamHeroImage from "../../public/images/cam95.jpg";
+//import CamartLogo from "../../public/images/cam_art_logo_white.png";
+//import CamHeroImage from "../../public/images/cam95.jpg";
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -13,10 +13,12 @@ import {
   CamartIntroText,
   HeaderButtonContainer,
   BackgroundImageWrapper,
-} from "./styles";
+} from "./styles.ts";
 
-export const Header = () => {
-  const handleContactButtonClick = (event) => {
+export const Header: React.FC = () => {
+  const handleContactButtonClick = (
+    event: React.MouseEvent<HTMLAnchorElement>
+  ): void => {
     event.preventDefault();
     const contactSection = document.getElementById("menu-contacto");
     if (contactSection) {
@@ -44,7 +46,8 @@ export const Header = () => {
         >
           <ImageContainer>
             <Image
-              src={CamartLogo}
+              //src={CamartLogo}
+              src="/images/cam_art_logo_white.png"
               alt="Cam Art Logo"
               width={250}
               height={200}

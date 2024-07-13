@@ -1,14 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { Container, Grow } from "@mui/material";
+import { Box, Container, Grow } from "@mui/material";
 import Image from "next/image";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { motion } from "framer-motion";
-import { formatText } from "@/utils/formatText";
-import { ArtistBio } from "@/utils/ArtistBio";
+import { formatText } from "../../utils/formatText";
+import { ArtistBio } from "../../utils/ArtistBio";
 import {
   ArtistSectionWrapper,
   ArtistSectionTitle,
@@ -20,16 +20,26 @@ import {
   ActionContainer,
   ReadMoreButton,
   SocialIconButton,
-} from "./styles";
+} from "./styles.ts";
 
-const ArtistSection = () => {
-  const [hoveredArtist, setHoveredArtist] = useState(null);
+type ArtistSection = {
+  name: string;
+  bio: string;
+  image: string;
+};
+
+type ArtistBioType = {
+  [key: string]: ArtistSection;
+};
+
+const ArtistSection: React.FC = () => {
+  const [hoveredArtist, setHoveredArtist] = useState<string | null>(null);
 
   return (
     <ArtistSectionWrapper id="menu-about">
-      <Container /*maxWidth="lg"*/ sx={{ mt: 3 }}>
+      <Container sx={{ mt: 3 }}>
         <ArtistSectionTitle variant="h4">ARTISTAS CAMART</ArtistSectionTitle>
-        {Object.entries(ArtistBio).map(([key, artist]) => (
+        {Object.entries(ArtistBio as ArtistBioType).map(([key, artist]) => (
           <motion.div
             key={key}
             whileHover={{ scale: 1.02 }}
@@ -61,7 +71,7 @@ const ArtistSection = () => {
                 </ArtistDescription>
                 <ActionContainer>
                   <ReadMoreButton variant="contained">Leer más</ReadMoreButton>
-                  <div>
+                  <Box>
                     {["instagram", "twitter", "facebook"].map(
                       (social, index) => (
                         <Grow
@@ -72,19 +82,22 @@ const ArtistSection = () => {
                             ? { timeout: 1000 + index * 200 }
                             : {})}
                         >
-                          <SocialIconButton
-                            component={Link}
+                          <Link
                             href={`https://www.${social}.com/`}
+                            passHref
                             target="_blank"
+                            rel="noopener noreferrer"
                           >
-                            {social === "instagram" && <InstagramIcon />}
-                            {social === "twitter" && <TwitterIcon />}
-                            {social === "facebook" && <FacebookIcon />}
-                          </SocialIconButton>
+                            <SocialIconButton>
+                              {social === "instagram" && <InstagramIcon />}
+                              {social === "twitter" && <TwitterIcon />}
+                              {social === "facebook" && <FacebookIcon />}
+                            </SocialIconButton>
+                          </Link>
                         </Grow>
                       )
                     )}
-                  </div>
+                  </Box>
                 </ActionContainer>
               </ArtistContentContainer>
             </ArtistSectionCard>

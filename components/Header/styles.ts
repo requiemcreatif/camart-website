@@ -1,7 +1,16 @@
 "use client";
-import { styled, Container, Box, Typography, Button } from "@mui/material";
+import {
+  styled,
+  Container,
+  Box,
+  Typography,
+  ContainerProps,
+  BoxProps,
+  TypographyProps,
+  ButtonProps,
+} from "@mui/material";
 
-export const HeaderWrapper = styled(Box)`
+export const HeaderWrapper = styled(Box)<BoxProps>`
   margin-top: 30px;
   position: relative;
   color: #fff;
@@ -16,7 +25,7 @@ export const HeaderWrapper = styled(Box)`
   }
 `;
 
-export const BackgroundImageWrapper = styled(Box)`
+export const BackgroundImageWrapper = styled(Box)<BoxProps>`
   position: absolute;
   top: 0;
   left: 0;
@@ -34,7 +43,7 @@ export const BackgroundImageWrapper = styled(Box)`
   }
 `;
 
-export const HeaderContainer = styled(Container)`
+export const HeaderContainer = styled(Container)<ContainerProps>`
   position: relative;
   z-index: 1;
   display: flex;
@@ -44,13 +53,13 @@ export const HeaderContainer = styled(Container)`
   padding: 50px 0;
 `;
 
-export const ImageContainer = styled(Box)`
+export const ImageContainer = styled(Box)<BoxProps>`
   max-width: 300px;
   width: 100%;
   margin-bottom: 2rem;
 `;
 
-export const CamartIntro = styled(Typography)`
+export const CamartIntro = styled(Typography)<TypographyProps>`
   font-size: 1.5rem;
   text-align: center;
   font-weight: 500;
@@ -58,7 +67,7 @@ export const CamartIntro = styled(Typography)`
   margin-bottom: 1rem;
 `;
 
-export const CamartIntroText = styled(Typography)`
+export const CamartIntroText = styled(Typography)<TypographyProps>`
   font-size: 1rem;
   text-align: center;
   font-weight: 300;
@@ -66,7 +75,7 @@ export const CamartIntroText = styled(Typography)`
   margin: 0 auto 2rem;
 `;
 
-export const HeaderButtonContainer = styled(Box)`
+export const HeaderButtonContainer = styled(Box)<BoxProps>`
   display: flex;
   justify-content: center;
 `;
