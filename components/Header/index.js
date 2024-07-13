@@ -16,7 +16,14 @@ import {
 } from "./styles";
 
 export const Header = () => {
-  console.log("CamHeroImage.src: ", CamHeroImage.src);
+  const handleContactButtonClick = (event) => {
+    event.preventDefault();
+    const contactSection = document.getElementById("menu-contacto");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <HeaderWrapper id="menu-home">
       {/* <BackgroundImageWrapper>
@@ -74,7 +81,13 @@ export const Header = () => {
         </Box>
         <HeaderButtonContainer>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button variant="outlined" color="inherit" size="large">
+            <Button
+              variant="outlined"
+              color="inherit"
+              size="large"
+              href="#menu-contacto"
+              onClick={handleContactButtonClick}
+            >
               Contáctanos
             </Button>
           </motion.div>
