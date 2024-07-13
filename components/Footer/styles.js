@@ -2,9 +2,10 @@
 import { styled, Container, Box, Typography } from "@mui/material";
 
 export const FooterContainer = styled(Box)`
-  background-color: #131313;
+  //background-color: #131313;
+  background-color: #000;
   color: #9f9fa4;
-  padding: 0 20px;
+  padding: 35px 20px 20px;
   text-align: center;
   font-weight: 500;
   text-transform: uppercase;

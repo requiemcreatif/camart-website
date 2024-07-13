@@ -45,10 +45,10 @@ export const Navbar = () => {
   const iconColor = isScrolled ? "#000000" : "#ffffff";
 
   return (
-    <NavWrapper isScrolled={isScrolled}>
+    <NavWrapper isscrolled={isScrolled.toString()}>
       <Container>
         <NavbarContainer>
-          <NavLogo isScrolled={isScrolled}>
+          <NavLogo isscrolled={isScrolled.toString()}>
             <Typography
               variant="h6"
               sx={{
@@ -62,7 +62,7 @@ export const Navbar = () => {
           <DesktopMenu>
             {menuItems.map((item) => (
               <li key={item}>
-                <NavLink isScrolled={isScrolled}>
+                <NavLink isscrolled={isScrolled.toString()}>
                   <Link href="#">{item}</Link>
                 </NavLink>
               </li>
@@ -86,7 +86,7 @@ export const Navbar = () => {
         anchor="right"
         open={isMobileMenuOpen}
         onClose={toggleMobileMenu}
-        isScrolled={isScrolled}
+        isscrolled={isScrolled.toString()}
       >
         <IconButton
           sx={{ alignSelf: "flex-end", margin: "10px" }}
@@ -96,7 +96,7 @@ export const Navbar = () => {
         </IconButton>
         <MobileMenuList>
           {menuItems.map((item) => (
-            <MobileMenuItem key={item} isScrolled={isScrolled}>
+            <MobileMenuItem key={item} isscrolled={isScrolled.toString()}>
               <Link href="#" onClick={toggleMobileMenu}>
                 {item}
               </Link>

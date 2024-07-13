@@ -6,10 +6,11 @@ export const ContactFormWrapper = styled(Container)`
   grid-template-columns: 1fr;
   gap: 20px;
   color: #9f9fa4;
+  padding: 55px 20px 40px;
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
-    padding: 20px 0;
+    padding: 55px 0 40px;
   }
 `;
 

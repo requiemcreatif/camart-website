@@ -22,7 +22,7 @@ const ContactForm = () => {
     <Box
       sx={{
         backgroundColor: "#131313",
-        padding: "40px 0",
+        //padding: "40px 0",
         color: "#9f9fa4",
       }}
     >

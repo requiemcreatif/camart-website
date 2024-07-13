@@ -3,7 +3,8 @@ import { styled, Typography, Box, Drawer } from "@mui/material";
 
 export const NavWrapper = styled("div")`
   padding: 15px 0;
-  background-color: ${({ isScrolled }) => (isScrolled ? "#ffffff" : "#000000")};
+  background-color: ${({ isscrolled }) =>
+    isscrolled === "true" ? "#ffffff" : "#000000"};
   transition: background-color 0.3s ease;
   position: fixed;
   top: 0;
@@ -30,7 +31,8 @@ export const DesktopMenu = styled("ul")`
 
 export const NavLink = styled(Box)`
   a {
-    color: ${({ isScrolled }) => (isScrolled ? "#000000" : "#ffffff")};
+    color: ${({ isscrolled }) =>
+      isscrolled === "true" ? "#000000" : "#ffffff"};
     text-decoration: none;
     transition: color 0.3s ease;
     &:hover {
@@ -40,7 +42,7 @@ export const NavLink = styled(Box)`
 `;
 
 export const NavLogo = styled("div")`
-  color: ${({ isScrolled }) => (isScrolled ? "#000000" : "#ffffff")};
+  color: ${({ isscrolled }) => (isscrolled === "true" ? "#000000" : "#ffffff")};
   font-weight: bold;
   transition: color 0.3s ease;
 `;
@@ -55,9 +57,10 @@ export const MobileMenuIcon = styled(Box)`
 export const StyledDrawer = styled(Drawer)`
   .MuiDrawer-paper {
     width: 350px;
-    background-color: ${({ isScrolled }) =>
-      isScrolled ? "#ffffff" : "#000000"};
-    color: ${({ isScrolled }) => (isScrolled ? "#000000" : "#ffffff")};
+    background-color: ${({ isscrolled }) =>
+      isscrolled === "true" ? "#ffffff" : "#000000"};
+    color: ${({ isscrolled }) =>
+      isscrolled === "true" ? "#000000" : "#ffffff"};
   }
 `;
 
@@ -70,5 +73,5 @@ export const MobileMenuList = styled("ul")`
 export const MobileMenuItem = styled("li")`
   padding: 15px 20px;
   border-bottom: 1px solid
-    ${({ isScrolled }) => (isScrolled ? "#e0e0e0" : "#333333")};
+    ${({ isscrolled }) => (isscrolled === "true" ? "#e0e0e0" : "#333333")};
 `;
