@@ -1,56 +1,91 @@
 "use client";
-import { styled, Container, Box, Typography } from "@mui/material";
+import { styled, Container, Box, Typography, IconButton } from "@mui/material";
 
 export const FooterContainer = styled(Box)`
-  //background-color: #131313;
   background-color: #000;
   color: #9f9fa4;
-  padding: 35px 20px 20px;
-  text-align: center;
-  font-weight: 500;
-  text-transform: uppercase;
+  padding: 40px 0;
 `;
 
 export const FooterWrapper = styled(Container)`
-  padding: 0 0 20px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin: 0 auto;
+  gap: 30px;
 
   @media (min-width: 768px) {
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 `;
 
 export const FooterSocial = styled(Box)`
-  padding: 0 10px;
   display: flex;
   justify-content: center;
   gap: 20px;
 `;
-export const FooterTextContent = styled(Box)`
-  padding: 0 10px;
-`;
-export const FooterCopyrights = styled(Typography)`
-  font-size: 0.7rem;
+
+export const SocialIconButton = styled(IconButton)`
+  color: #9f9fa4;
+  transition: color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    color: #a91d3a;
+    transform: translateY(-3px);
+  }
 `;
 
-export const FooterBottom = styled(Typography)`
-  font-size: 0.6rem;
+export const FooterTextContent = styled(Box)`
+  text-align: center;
+
+  @media (min-width: 768px) {
+    text-align: right;
+  }
+`;
+
+export const FooterCopyrights = styled(Typography)`
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+
+  a {
+    color: #9f9fa4;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #a91d3a;
+    }
+  }
 `;
 
 export const FooterTerms = styled(Box)`
   display: flex;
   justify-content: center;
   gap: 15px;
-  padding: 10px 0;
+  margin-bottom: 10px;
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+  }
 `;
 
 export const FooterLink = styled(Typography)`
-  display: flex;
-  gap: 10px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+
+  a {
+    color: #9f9fa4;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #a91d3a;
+    }
+  }
+`;
+
+export const FooterBottom = styled(Typography)`
+  font-size: 0.7rem;
+  opacity: 0.7;
 `;

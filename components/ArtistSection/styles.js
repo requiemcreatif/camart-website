@@ -23,7 +23,6 @@ export const ArtistSectionCard = styled(Box)`
   display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.07);
-  //background-color: #000;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

@@ -1,9 +1,10 @@
+import React from "react";
 import Link from "next/link";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, IconButton } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import XIcon from "@mui/icons-material/X";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import {
   FooterWrapper,
   FooterContainer,
@@ -13,36 +14,48 @@ import {
   FooterCopyrights,
   FooterSocial,
   FooterBottom,
+  SocialIconButton,
 } from "./styles";
 
 export const Footer = () => {
+  const socialIcons = [
+    { Icon: InstagramIcon, url: "#" },
+    { Icon: FacebookIcon, url: "#" },
+    { Icon: YouTubeIcon, url: "#" },
+    { Icon: TwitterIcon, url: "#" },
+  ];
+
   return (
     <FooterContainer>
       <FooterWrapper>
         <FooterSocial>
-          <InstagramIcon />
-          <FacebookIcon />
-          <YouTubeIcon />
-          <XIcon />
+          {socialIcons.map(({ Icon, url }, index) => (
+            <SocialIconButton
+              key={index}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon />
+            </SocialIconButton>
+          ))}
         </FooterSocial>
         <FooterTextContent>
           <FooterCopyrights>
             © 2024 | All rights reserved | Designed by:{" "}
-            <a href="#">Requiem Creatif</a>
+            <Link href="#" passHref>
+              Requiem Creatif
+            </Link>
           </FooterCopyrights>
           <FooterTerms>
-            <FooterLink>
-              <Link href="#">Contactanos</Link>
-              <span>|</span>
-            </FooterLink>
-            <FooterLink>
-              <Link href="#">Privacidad</Link>
-              <span>|</span>
-            </FooterLink>
-            <FooterLink>
-              <Link href="#">Terminos</Link>
-              <span>|</span>
-            </FooterLink>
+            {["Contactanos", "Privacidad", "Terminos"].map((item, index) => (
+              <React.Fragment key={item}>
+                <FooterLink>
+                  <Link href="#">{item}</Link>
+                </FooterLink>
+                {index < 2 && <span>|</span>}
+              </React.Fragment>
+            ))}
           </FooterTerms>
           <FooterBottom variant="body2">
             Cam Art - Xoko Suizo - Requiem Creatif son marcas registradas. Todos

@@ -2,12 +2,18 @@
 import { styled, Container, Box, Typography, Button } from "@mui/material";
 
 export const HeaderWrapper = styled(Box)`
+  margin-top: 30px;
   position: relative;
   color: #fff;
   min-height: 40vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #a91d3a;
+
+  @media (min-width: 600px) {
+    margin-top: 20px;
+  }
 `;
 
 export const BackgroundImageWrapper = styled(Box)`

@@ -27,8 +27,8 @@ const ArtistSection = () => {
 
   return (
     <ArtistSectionWrapper>
-      <Container maxWidth="lg">
-        <ArtistSectionTitle variant="h3">ARTISTAS CAMART</ArtistSectionTitle>
+      <Container /*maxWidth="lg"*/ sx={{ mt: 3 }}>
+        <ArtistSectionTitle variant="h4">ARTISTAS CAMART</ArtistSectionTitle>
         {Object.entries(ArtistBio).map(([key, artist]) => (
           <motion.div
             key={key}
@@ -49,7 +49,7 @@ const ArtistSection = () => {
               </ArtistImageContainer>
               <ArtistContentContainer>
                 <ArtistName
-                  variant="h4"
+                  variant="h5"
                   sx={{
                     textTransform: "uppercase",
                   }}

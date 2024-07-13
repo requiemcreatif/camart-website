@@ -19,7 +19,7 @@ export const Header = () => {
   console.log("CamHeroImage.src: ", CamHeroImage.src);
   return (
     <HeaderWrapper>
-      <BackgroundImageWrapper>
+      {/* <BackgroundImageWrapper>
         <Image
           src={CamHeroImage}
           alt="Background"
@@ -28,7 +28,7 @@ export const Header = () => {
           quality={100}
           priority
         />
-      </BackgroundImageWrapper>
+      </BackgroundImageWrapper> */}
       <HeaderContainer maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
@@ -45,7 +45,7 @@ export const Header = () => {
             />
           </ImageContainer>
         </motion.div>
-        <Box sx={{ mt: 4 }}>
+        <Box sx={{ mt: 3, px: "10px" }}>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
