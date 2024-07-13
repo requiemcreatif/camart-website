@@ -41,7 +41,7 @@ export const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const menuItems = ["Home", "About", "Media", "Contact"];
+  const menuItems = ["Home", "About", "Noticias", "Contacto"];
   const iconColor = isScrolled ? "#000000" : "#ffffff";
 
   return (
