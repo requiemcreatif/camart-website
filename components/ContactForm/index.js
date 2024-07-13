@@ -80,8 +80,9 @@ const ContactForm = () => {
                   variant="contained"
                   color="primary"
                   fullWidth
+                  sx={{ backgroundColor: "#a91d3a" }}
                 >
-                  Submit
+                  Enviar
                 </Button>
               </Grid>
             </Grid>

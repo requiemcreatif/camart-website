@@ -59,7 +59,7 @@ const CookieDisclaimer = () => {
             backgroundColor: "#000",
             textTransform: "none",
             width: "150px",
-            "&:hover": { backgroundColor: "#e0e0e0" },
+            "&:hover": { backgroundColor: "#a91d3a" },
           }}
         >
           Rechazar Todo
@@ -75,7 +75,7 @@ const CookieDisclaimer = () => {
             backgroundColor: "#000",
             textTransform: "none",
             width: "150px",
-            "&:hover": { backgroundColor: "#e0e0e0" },
+            "&:hover": { backgroundColor: "#a91d3a" },
           }}
         >
           Aceptar Todo
@@ -93,7 +93,7 @@ const CookieDisclaimer = () => {
             backgroundColor: "#000",
             textTransform: "none",
             width: "160px",
-            "&:hover": { backgroundColor: "#e0e0e0" },
+            "&:hover": { backgroundColor: "#a91d3a" },
           }}
         >
           Elegir cookies

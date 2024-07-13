@@ -36,6 +36,7 @@ export const ContactTextField = styled(TextField)`
 
 export const StyledCheckbox = styled(Checkbox)`
   color: #9f9fa4;
+  border-color: #9f9fa4;
   &.Mui-checked {
     color: #1976d2;
   }
