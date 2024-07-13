@@ -248,7 +248,7 @@ const cardData = [
 ];
 
 export default function ImageContent() {
-  const [visibleCards, setVisibleCards] = useState(3);
+  const [visibleCards, setVisibleCards] = useState(4);
 
   const loadMore = () => {
     setVisibleCards((prevVisible) =>
