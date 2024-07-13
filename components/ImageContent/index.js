@@ -260,7 +260,7 @@ export default function ImageContent() {
     <ImageContentWrapper>
       <Container /*maxWidth="xl"*/>
         <Typography variant="h4" sx={{ mb: 4, textAlign: "center" }}>
-          Latest Events
+          Ultimas Noticias
         </Typography>
         <ImageContainer>
           <AnimatePresence>
