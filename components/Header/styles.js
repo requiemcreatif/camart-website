@@ -2,7 +2,8 @@
 import { styled, Container, Box } from "@mui/material";
 
 export const HeaderWrapper = styled("div")`
-  background-color: #000;
+  //background-color: #000;
+  background-color: #cf2e2e;
   color: #fff;
   padding: 50px 0;
 `;

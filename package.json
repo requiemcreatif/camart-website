@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.16",
     "@mui/system": "^5.15.15",
     "axios": "^1.6.8",
+    "framer-motion": "^11.3.2",
     "next": "14.2.3",
     "prop-types": "^15.8.1",
     "react": "^18",

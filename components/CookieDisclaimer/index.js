@@ -28,10 +28,11 @@ const CookieDisclaimer = () => {
     >
       <Container>
         <Typography variant="body2" sx={{ marginBottom: 2 }}>
-          We are passionate about music. To help us share that passion we'd like
-          to use cookies and similar technologies to personalize your
-          experiences on our sites and to advertise on other sites. For more
-          information and additional choices click Cookie Choices below.{" "}
+          Nos apasiona la música. Para ayudarnos a compartir esa pasión, nos
+          gustaría usar cookies y tecnologías similares para personalizar tus
+          experiencias en nuestros sitios y para publicitar en otros sitios.
+          Para obtener más información y opciones adicionales, haz clic en
+          Opciones de Cookies a continuación.{" "}
           <Link href="#" color="inherit" underline="always">
             Privacy Policy
           </Link>

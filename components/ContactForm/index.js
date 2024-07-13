@@ -87,20 +87,21 @@ const ContactForm = () => {
             </Grid>
           </form>
         </Box>
-        <Typography variant="body2" color="#9f9fa4" /*sx={{ mt: 2 }}*/>
-          Al enviar este formulario, acepto recibir noticias, fechas de gira y
-          ofertas especiales de CamArt. Los correos electrónicos serán enviados
-          por o en nombre de CamArt Group 2220 Colorado Avenue, Santa Monica, CA
-          90404 (310) 865-4000. Puede retirar su consentimiento en cualquier
-          momento.
+        <Box>
+          <Typography variant="body2" color="#9f9fa4" /*sx={{ mt: 2 }}*/>
+            Al enviar este formulario, acepto recibir noticias, fechas de gira y
+            ofertas especiales de CamArt. Los correos electrónicos serán
+            enviados por o en nombre de CamArt productions. Puede retirar su
+            consentimiento en cualquier momento.
+          </Typography>
           <Button color="primary" size="small">
             Política de privacidad
           </Button>{" "}
-          /
+          |
           <Button color="primary" size="small">
             No vender mi información personal
           </Button>
-        </Typography>
+        </Box>
       </ContactFormWrapper>
       <Divider sx={{ mt: 3, backgroundColor: "#9f9fa4" }} />
     </Box>
