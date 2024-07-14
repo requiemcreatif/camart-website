@@ -13,7 +13,7 @@ import {
   CamartIntroText,
   HeaderButtonContainer,
   BackgroundImageWrapper,
-} from "./styles.ts";
+} from "./styles";
 
 export const Header: React.FC = () => {
   const handleContactButtonClick = (

@@ -77,6 +77,7 @@ export const ReadMoreButton = styled(Button)`
   padding: 8px 32px;
   border-radius: 25px;
   //background-color: #1976d2;
+  cursor: pointer;
   background-color: #40679e;
   &:hover {
     background-color: #115293;

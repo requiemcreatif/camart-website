@@ -20,7 +20,7 @@ import {
   ActionContainer,
   ReadMoreButton,
   SocialIconButton,
-} from "./styles.ts";
+} from "./styles";
 
 type ArtistSection = {
   name: string;
