@@ -3,8 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { Box, Button } from "@mui/material";
 import { motion } from "framer-motion";
-//import CamartLogo from "../../public/images/cam_art_logo_white.png";
-//import CamHeroImage from "../../public/images/cam95.jpg";
+import { camartData } from "../../data/camartData";
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -12,8 +11,11 @@ import {
   CamartIntro,
   CamartIntroText,
   HeaderButtonContainer,
-  BackgroundImageWrapper,
 } from "./styles";
+
+type camartData = {
+  introText: string;
+};
 
 export const Header: React.FC = () => {
   const handleContactButtonClick = (
@@ -28,16 +30,6 @@ export const Header: React.FC = () => {
 
   return (
     <HeaderWrapper id="menu-home">
-      {/* <BackgroundImageWrapper>
-        <Image
-          src={CamHeroImage}
-          alt="Background"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          priority
-        />
-      </BackgroundImageWrapper> */}
       <HeaderContainer maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
@@ -46,12 +38,10 @@ export const Header: React.FC = () => {
         >
           <ImageContainer>
             <Image
-              //src={CamartLogo}
               src="/images/cam_art_logo_white.png"
               alt="Cam Art Logo"
               width={250}
               height={200}
-              layout="responsive"
             />
           </ImageContainer>
         </motion.div>
@@ -70,16 +60,7 @@ export const Header: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            <CamartIntroText>
-              En Cam Art Booking, tenemos actualmente a varios artistas del
-              mundo del Hip-hop/Reggae. Os dejamos sus distintos apartados
-              profesionales, donde podréis ver su trayectoria y saber más sobre
-              ellos y su música. Nuestro equipo estará encantado de resolver
-              vuestras dudas y preguntas. Contratando un artista Cam Art,
-              estarás impulsando un movimiento, la cultura y un espectáculo
-              digno de ver cómo es "Cam Art Festival" ¿Quieres a algún artista
-              de nuestra agenda? Contáctanos.
-            </CamartIntroText>
+            <CamartIntroText>{camartData.introText}</CamartIntroText>
           </motion.div>
         </Box>
         <HeaderButtonContainer>

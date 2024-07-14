@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import Card from "./Card";
@@ -70,7 +71,6 @@ const cardData = [
     description:
       "En Cam Art Booking, tenemos actualmente a varios artistas del mundo...",
   },
-  // ... Add data for other cards
 ];
 
 export default function ImageContent() {

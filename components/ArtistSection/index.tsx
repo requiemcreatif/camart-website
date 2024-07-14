@@ -53,8 +53,9 @@ const ArtistSection: React.FC = () => {
                 <Image
                   src={artist.image}
                   alt={artist.name}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  quality={100}
+                  style={{ objectFit: "cover" }}
                 />
               </ArtistImageContainer>
               <ArtistContentContainer>

@@ -10,6 +10,7 @@ import {
   FormControlLabel,
   Divider,
 } from "@mui/material";
+import { camartData } from "@/data/camartData";
 import { ContactFormWrapper, ContactTextField } from "./styles";
 
 const ContactForm = () => {
@@ -91,10 +92,7 @@ const ContactForm = () => {
         </Box>
         <Box>
           <Typography variant="body2" color="#9f9fa4" /*sx={{ mt: 2 }}*/>
-            Al enviar este formulario, acepto recibir noticias, fechas de gira y
-            ofertas especiales de CamArt. Los correos electrónicos serán
-            enviados por o en nombre de CamArt productions. Puede retirar su
-            consentimiento en cualquier momento.
+            {camartData.contactIformation}
           </Typography>
           <Button color="primary" size="small">
             Política de privacidad
