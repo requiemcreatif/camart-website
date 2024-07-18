@@ -7,8 +7,11 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { motion } from "framer-motion";
-import { formatText } from "../../utils/formatText";
 import { ArtistBio } from "../../utils/ArtistBio";
+import { formatText } from "../../utils/formatText";
+import { options } from "@/configs/options";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import {
   ArtistSectionWrapper,
   ArtistSectionTitle,
@@ -22,36 +25,45 @@ import {
   SocialIconButton,
 } from "./styles";
 
-type ArtistSection = {
-  name: string;
-  bio: string;
-  image: string;
+const fetchArtists = async () => {
+  const response = await axios.get("/artists");
+  return response.data;
 };
 
-type ArtistBioType = {
-  [key: string]: ArtistSection;
-};
+const ArtistSection = () => {
+  const baseUrl = options.baseUrl;
+  const [hoveredArtist, setHoveredArtist] = useState(null);
+  const {
+    data: artists,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["artists"],
+    queryFn: fetchArtists,
+  });
 
-const ArtistSection: React.FC = () => {
-  const [hoveredArtist, setHoveredArtist] = useState<string | null>(null);
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching artists</div>;
+
+  console.log(artists);
 
   return (
     <ArtistSectionWrapper id="menu-about">
       <Container sx={{ mt: 3 }}>
         <ArtistSectionTitle variant="h4">ARTISTAS CAMART</ArtistSectionTitle>
-        {Object.entries(ArtistBio as ArtistBioType).map(([key, artist]) => (
+        {artists.map((artist) => (
           <motion.div
-            key={key}
+            key={artist._id}
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <ArtistSectionCard
-              onMouseEnter={() => setHoveredArtist(key)}
+              onMouseEnter={() => setHoveredArtist(artist._id)}
               onMouseLeave={() => setHoveredArtist(null)}
             >
               <ArtistImageContainer>
                 <Image
-                  src={artist.image}
+                  src={`${artist.imageUrl}`}
                   alt={artist.name}
                   fill
                   quality={100}
@@ -68,7 +80,7 @@ const ArtistSection: React.FC = () => {
                   {artist.name}
                 </ArtistName>
                 <ArtistDescription variant="body1">
-                  {formatText(artist.bio)}
+                  {artist.shortBio}
                 </ArtistDescription>
                 <ActionContainer>
                   <ReadMoreButton variant="contained">Leer más</ReadMoreButton>
@@ -76,15 +88,17 @@ const ArtistSection: React.FC = () => {
                     {["instagram", "twitter", "facebook"].map(
                       (social, index) => (
                         <Grow
-                          in={hoveredArtist === key}
+                          in={hoveredArtist === artist._id}
                           key={social}
                           style={{ transformOrigin: "0 0 0" }}
-                          {...(hoveredArtist === key
+                          {...(hoveredArtist === artist._id
                             ? { timeout: 1000 + index * 200 }
                             : {})}
                         >
                           <Link
-                            href={`https://www.${social}.com/`}
+                            href={
+                              artist[social] || `https://www.${social}.com/`
+                            }
                             passHref
                             target="_blank"
                             rel="noopener noreferrer"

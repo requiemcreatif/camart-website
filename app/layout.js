@@ -1,5 +1,6 @@
 import { Inter, Roboto } from "next/font/google";
 import Head from "next/head";
+import Providers from "./provider";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -41,7 +42,9 @@ export default function RootLayout({ children }) {
         />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
