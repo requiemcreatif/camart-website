@@ -7,6 +7,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { motion } from "framer-motion";
+import { formatText } from "@/utils/formatText";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import {
@@ -41,7 +42,8 @@ const fetchArtists = async (): Promise<Artist[]> => {
   console.log("Fetching artists...");
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/wp-json/omeruta/v1/artists`
+      // `${process.env.NEXT_PUBLIC_API_BASE_URL}/wp-json/omeruta/v1/artists`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/wp-json/acf/v3/artist`
     );
     console.log("API response:", JSON.stringify(response.data, null, 2));
     return response.data;
@@ -104,7 +106,7 @@ const ArtistSection = () => {
             >
               <ArtistImageContainer>
                 <Image
-                  src={artist.imageUrl || "/path/to/placeholder-image.jpg"}
+                  src={artist?.acf?.artist_image}
                   alt={artist.name}
                   fill
                   style={{ objectFit: "cover" }}
@@ -120,7 +122,7 @@ const ArtistSection = () => {
                   {artist.name}
                 </ArtistName>
                 <ArtistDescription variant="body1">
-                  {artist.shortBio}
+                  {formatText(artist.acf?.short_bio)}
                 </ArtistDescription>
                 <ActionContainer>
                   <ReadMoreButton variant="contained">Leer más</ReadMoreButton>
@@ -136,11 +138,12 @@ const ArtistSection = () => {
                             : {})}
                         >
                           <Link
-                            href={
-                              artist.social[
-                                social as keyof typeof artist.social
-                              ] || `https://www.${social}.com/`
-                            }
+                            href="#"
+                            // href={
+                            //   artist.social[
+                            //     social as keyof typeof artist.social
+                            //   ] || `https://www.${social}.com/`
+                            // }
                             passHref
                             target="_blank"
                             rel="noopener noreferrer"
