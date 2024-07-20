@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Box, Container, Grow, CircularProgress } from "@mui/material";
 import Image from "next/image";
@@ -7,8 +7,8 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { motion } from "framer-motion";
-import { formatText } from "@/utils/formatText";
 import { useQuery } from "@tanstack/react-query";
+import { options } from "@/configs/options";
 import axios from "axios";
 import {
   ArtistSectionWrapper,
@@ -29,7 +29,7 @@ interface Artist {
   content: string;
   shortBio: string;
   fullBio: string;
-  imageUrl: string | false;
+  imageUrl: string | null;
   social: {
     instagram: string;
     facebook: string;
@@ -42,8 +42,7 @@ const fetchArtists = async (): Promise<Artist[]> => {
   console.log("Fetching artists...");
   try {
     const response = await axios.get(
-      // `${process.env.NEXT_PUBLIC_API_BASE_URL}/wp-json/omeruta/v1/artists`
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/wp-json/acf/v3/artist`
+      `${options.baseUrl}/wp-json/omeruta/v1/artists`
     );
     console.log("API response:", JSON.stringify(response.data, null, 2));
     return response.data;
@@ -60,26 +59,12 @@ const ArtistSection = () => {
     isLoading,
     isError,
     error,
-    isFetching,
   } = useQuery<Artist[], Error>({
     queryKey: ["artists"],
     queryFn: fetchArtists,
-    refetchOnWindowFocus: false,
-    retry: 3,
-    onSuccess: (data) => console.log("Query succeeded:", data),
-    onError: (err) => console.error("Query failed:", err),
   });
 
-  useEffect(() => {
-    console.log("Component rendered. React Query state:", {
-      artists,
-      isLoading,
-      isError,
-      isFetching,
-    });
-  }, [artists, isLoading, isError, isFetching]);
-
-  if (isLoading || isFetching)
+  if (isLoading)
     return (
       <Container>
         <CircularProgress />
@@ -106,7 +91,7 @@ const ArtistSection = () => {
             >
               <ArtistImageContainer>
                 <Image
-                  src={artist?.acf?.artist_image}
+                  src={artist.imageUrl || "/path/to/placeholder-image.jpg"}
                   alt={artist.name}
                   fill
                   style={{ objectFit: "cover" }}
@@ -122,7 +107,7 @@ const ArtistSection = () => {
                   {artist.name}
                 </ArtistName>
                 <ArtistDescription variant="body1">
-                  {formatText(artist.acf?.short_bio)}
+                  {artist.shortBio}
                 </ArtistDescription>
                 <ActionContainer>
                   <ReadMoreButton variant="contained">Leer más</ReadMoreButton>
@@ -138,12 +123,11 @@ const ArtistSection = () => {
                             : {})}
                         >
                           <Link
-                            href="#"
-                            // href={
-                            //   artist.social[
-                            //     social as keyof typeof artist.social
-                            //   ] || `https://www.${social}.com/`
-                            // }
+                            href={
+                              artist.social[
+                                social as keyof typeof artist.social
+                              ] || `https://www.${social}.com/`
+                            }
                             passHref
                             target="_blank"
                             rel="noopener noreferrer"
