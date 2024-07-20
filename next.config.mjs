@@ -3,7 +3,7 @@ import { Domain } from "@mui/icons-material";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: ["res.cloudinary.com", "api-omeruta.com"],
   },
   rewrites: async () => {
     return [

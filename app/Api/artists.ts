@@ -26,12 +26,12 @@ export default async function handler(
   try {
     // Perform the GET request to fetch artist data, expecting an array of Artist objects
     const response: AxiosResponse<Artist[]> = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`, // Ensure the URL is correct
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`, // Use the API token from environment variables
-        },
-      }
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/wp-json/wp/v2` // Ensure the URL is correct
+      // {
+      //   // headers: {
+      //   //   Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`, // Use the API token from environment variables
+      //   // },
+      // }
     );
 
     // Send the fetched data as JSON with a 200 OK status
