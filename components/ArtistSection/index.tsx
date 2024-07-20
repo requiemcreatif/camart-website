@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Box, Container, Grow, CircularProgress } from "@mui/material";
-//import Image from "next/image";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
