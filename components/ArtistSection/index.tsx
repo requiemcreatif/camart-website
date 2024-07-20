@@ -49,9 +49,20 @@ const fetchArtists = async (): Promise<Artist[]> => {
   console.log("Fetching from URL:", url);
 
   try {
-    const response = await axios.get(url);
-    console.log("API response:", JSON.stringify(response.data, null, 2));
-    return response.data;
+    const response = await axios.get<Artist[]>(url);
+
+    // Transform image URLs
+    const transformedArtists = response.data.map((artist) => ({
+      ...artist,
+      acfImageUrl: transformImageUrl(artist.acfImageUrl),
+      featuredImageUrl: transformImageUrl(artist.featuredImageUrl),
+    }));
+
+    console.log(
+      "Transformed API response:",
+      JSON.stringify(transformedArtists, null, 2)
+    );
+    return transformedArtists;
   } catch (error) {
     console.error("Error fetching artists:", error);
     if (axios.isAxiosError(error)) {
@@ -60,6 +71,22 @@ const fetchArtists = async (): Promise<Artist[]> => {
     }
     throw error;
   }
+};
+
+const transformImageUrl = (url: string | null): string | null => {
+  if (!url) return null;
+
+  const assetBaseUrl =
+    process.env.NEXT_PUBLIC_ASSET_BASE_URL || "https://www.api-omeruta.com/";
+
+  // Check if the URL already starts with the correct base URL
+  if (url.startsWith(assetBaseUrl)) {
+    return url;
+  }
+
+  // If not, replace the domain part of the URL
+  const urlParts = new URL(url);
+  return `${assetBaseUrl}${urlParts.pathname}${urlParts.search}${urlParts.hash}`;
 };
 
 const ArtistSection = () => {
@@ -89,81 +116,86 @@ const ArtistSection = () => {
     <ArtistSectionWrapper id="menu-about">
       <Container sx={{ mt: 3 }}>
         <ArtistSectionTitle variant="h4">ARTISTAS CAMART</ArtistSectionTitle>
-        {artists.map((artist: Artist) => (
-          <motion.div
-            key={artist.id}
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            <ArtistSectionCard
-              onMouseEnter={() => setHoveredArtist(artist.id)}
-              onMouseLeave={() => setHoveredArtist(null)}
-            >
-              <ArtistImageContainer>
-                <Image
-                  src={
-                    artist?.imageUrl ||
-                    artist?.acfImageUrl ||
-                    artist?.featuredImageUrl
-                  }
-                  alt={artist.name}
-                  fill
-                  style={{ objectFit: "cover" }}
-
-                  // "acfImageUrl": "https://www.api-omeruta.com/wp-content/uploads/2024/07/telitah-dancer.jpeg",
-                  //"featuredImageUrl": "https://www.api-omeruta.com/wp-content/uploads/2024/07/telitah-dancer.jpeg",
-                />
-              </ArtistImageContainer>
-              <ArtistContentContainer>
-                <ArtistName
-                  variant="h5"
-                  sx={{
-                    textTransform: "uppercase",
-                  }}
+        {artists.map(
+          (artist: Artist) => (
+            console.log("acfImageUrl", artist.acfImageUrl),
+            (
+              <motion.div
+                key={artist.id}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <ArtistSectionCard
+                  onMouseEnter={() => setHoveredArtist(artist.id)}
+                  onMouseLeave={() => setHoveredArtist(null)}
                 >
-                  {artist.name}
-                </ArtistName>
-                <ArtistDescription variant="body1">
-                  {artist.shortBio}
-                </ArtistDescription>
-                <ActionContainer>
-                  <ReadMoreButton variant="contained">Leer más</ReadMoreButton>
-                  <Box>
-                    {["instagram", "twitter", "facebook"].map(
-                      (social, index) => (
-                        <Grow
-                          in={hoveredArtist === artist.id}
-                          key={social}
-                          style={{ transformOrigin: "0 0 0" }}
-                          {...(hoveredArtist === artist.id
-                            ? { timeout: 1000 + index * 200 }
-                            : {})}
-                        >
-                          <Link
-                            href={
-                              artist.social[
-                                social as keyof typeof artist.social
-                              ] || `https://www.${social}.com/`
-                            }
-                            passHref
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <SocialIconButton>
-                              {social === "instagram" && <InstagramIcon />}
-                              {social === "twitter" && <TwitterIcon />}
-                              {social === "facebook" && <FacebookIcon />}
-                            </SocialIconButton>
-                          </Link>
-                        </Grow>
-                      )
-                    )}
-                  </Box>
-                </ActionContainer>
-              </ArtistContentContainer>
-            </ArtistSectionCard>
-          </motion.div>
-        ))}
+                  <ArtistImageContainer>
+                    <Image
+                      src={
+                        artist?.imageUrl ||
+                        artist?.acfImageUrl ||
+                        artist?.featuredImageUrl ||
+                        ""
+                      }
+                      alt={artist.name}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
+                  </ArtistImageContainer>
+                  <ArtistContentContainer>
+                    <ArtistName
+                      variant="h5"
+                      sx={{
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {artist.name}
+                    </ArtistName>
+                    <ArtistDescription variant="body1">
+                      {artist.shortBio}
+                    </ArtistDescription>
+                    <ActionContainer>
+                      <ReadMoreButton variant="contained">
+                        Leer más
+                      </ReadMoreButton>
+                      <Box>
+                        {["instagram", "twitter", "facebook"].map(
+                          (social, index) => (
+                            <Grow
+                              in={hoveredArtist === artist.id}
+                              key={social}
+                              style={{ transformOrigin: "0 0 0" }}
+                              {...(hoveredArtist === artist.id
+                                ? { timeout: 1000 + index * 200 }
+                                : {})}
+                            >
+                              <Link
+                                href={
+                                  artist.social[
+                                    social as keyof typeof artist.social
+                                  ] || `https://www.${social}.com/`
+                                }
+                                passHref
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <SocialIconButton>
+                                  {social === "instagram" && <InstagramIcon />}
+                                  {social === "twitter" && <TwitterIcon />}
+                                  {social === "facebook" && <FacebookIcon />}
+                                </SocialIconButton>
+                              </Link>
+                            </Grow>
+                          )
+                        )}
+                      </Box>
+                    </ActionContainer>
+                  </ArtistContentContainer>
+                </ArtistSectionCard>
+              </motion.div>
+            )
+          )
+        )}
       </Container>
     </ArtistSectionWrapper>
   );
