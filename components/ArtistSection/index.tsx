@@ -2,13 +2,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Box, Container, Grow, CircularProgress } from "@mui/material";
-import Image from "next/image";
+//import Image from "next/image";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { options } from "@/configs/options";
+import { Image } from "@/components/image";
 import axios from "axios";
 import {
   ArtistSectionWrapper,
@@ -140,6 +141,7 @@ const ArtistSection = () => {
                       alt={artist.name}
                       fill
                       style={{ objectFit: "cover" }}
+                      //https://www.camart.es/_next/image?url=https%3A%2F%2Fwww.api-omeruta.com%2Fwp-content%2Fuploads%2F2024%2F07%2Ftelitah-dancer.jpeg&w=1920&q=75
                     />
                   </ArtistImageContainer>
                   <ArtistContentContainer>
