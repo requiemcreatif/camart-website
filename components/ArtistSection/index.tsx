@@ -30,6 +30,8 @@ interface Artist {
   shortBio: string;
   fullBio: string;
   imageUrl: string | null;
+  acfImageUrl: string | null;
+  featuredImageUrl: string | null;
   social: {
     instagram: string;
     facebook: string;
@@ -99,15 +101,17 @@ const ArtistSection = () => {
             >
               <ArtistImageContainer>
                 <Image
-                  src={artist.imageUrl}
+                  src={
+                    artist?.imageUrl ||
+                    artist?.acfImageUrl ||
+                    artist?.featuredImageUrl
+                  }
                   alt={artist.name}
                   fill
                   style={{ objectFit: "cover" }}
-                  // onError={(e) => {
-                  //   const target = e.target as HTMLImageElement;
-                  //   target.onerror = null;
-                  //   target.src = "/path/to/placeholder-image.jpg";
-                  // }}
+
+                  // "acfImageUrl": "https://www.api-omeruta.com/wp-content/uploads/2024/07/telitah-dancer.jpeg",
+                  //"featuredImageUrl": "https://www.api-omeruta.com/wp-content/uploads/2024/07/telitah-dancer.jpeg",
                 />
               </ArtistImageContainer>
               <ArtistContentContainer>
