@@ -40,14 +40,22 @@ interface Artist {
 
 const fetchArtists = async (): Promise<Artist[]> => {
   console.log("Fetching artists...");
+  const baseUrl = options.baseUrl.endsWith("/")
+    ? options.baseUrl.slice(0, -1)
+    : options.baseUrl;
+  const url = `${baseUrl}/wp-json/omeruta/v1/artists`;
+  console.log("Fetching from URL:", url);
+
   try {
-    const response = await axios.get(
-      `${options.baseUrl}/wp-json/omeruta/v1/artists`
-    );
+    const response = await axios.get(url);
     console.log("API response:", JSON.stringify(response.data, null, 2));
     return response.data;
   } catch (error) {
     console.error("Error fetching artists:", error);
+    if (axios.isAxiosError(error)) {
+      console.error("Request config:", error.config);
+      console.error("Response data:", error.response?.data);
+    }
     throw error;
   }
 };
