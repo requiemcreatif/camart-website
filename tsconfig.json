@@ -26,7 +26,8 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "data/camartData.js"
+    "data/camartData.js",
+    "utils/parseImageUrl.js"
   ],
   "exclude": ["node_modules"]
 }
