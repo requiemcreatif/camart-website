@@ -2,29 +2,25 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      process.env.NEXT_PUBLIC_ASSET_BASE_URL.replace(/https?:\/\//, "").replace(
-        /\/$/,
-        ""
-      ),
-      "0.gravatar.com",
-      "1.gravatar.com",
-      "2.gravatar.com",
-    ],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_ASSET_BASE_URL.replace(
-          /https?:\/\//,
-          ""
-        ).replace(/\/$/, ""),
+        hostname:
+          (process.env.NEXT_PUBLIC_ASSET_BASE_URL || "")
+            .replace(/^https?:\/\//, "")
+            .replace(/\/$/, "") || "api-omeruta.com",
       },
       {
-        protocol: "http",
-        hostname: process.env.NEXT_PUBLIC_ASSET_BASE_URL.replace(
-          /https?:\/\//,
-          ""
-        ).replace(/\/$/, ""),
+        protocol: "https",
+        hostname: "0.gravatar.com",
+      },
+      {
+        protocol: "https",
+        hostname: "1.gravatar.com",
+      },
+      {
+        protocol: "https",
+        hostname: "2.gravatar.com",
       },
     ],
   },
@@ -32,11 +28,15 @@ const nextConfig = {
     return [
       {
         source: "/wp-json/:path*",
-        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}wp-json/:path*`,
+        destination: `${
+          process.env.NEXT_PUBLIC_BACKEND_URL || "https://api-omeruta.com/"
+        }wp-json/:path*`,
       },
       {
         source: "/wp-content/:path*",
-        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}wp-content/:path*`,
+        destination: `${
+          process.env.NEXT_PUBLIC_BACKEND_URL || "https://api-omeruta.com/"
+        }wp-content/:path*`,
       },
     ];
   },
