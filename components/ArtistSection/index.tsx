@@ -91,10 +91,15 @@ const ArtistSection = () => {
             >
               <ArtistImageContainer>
                 <Image
-                  src={artist.imageUrl || "/path/to/placeholder-image.jpg"}
+                  src={artist.imageUrl}
                   alt={artist.name}
                   fill
                   style={{ objectFit: "cover" }}
+                  // onError={(e) => {
+                  //   const target = e.target as HTMLImageElement;
+                  //   target.onerror = null;
+                  //   target.src = "/path/to/placeholder-image.jpg";
+                  // }}
                 />
               </ArtistImageContainer>
               <ArtistContentContainer>
