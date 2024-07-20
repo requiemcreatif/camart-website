@@ -9,7 +9,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { options } from "@/configs/options";
-import { Image } from "@/components/image";
+import { Image } from "../shared/Image";
 import axios from "axios";
 import {
   ArtistSectionWrapper,
