@@ -23,9 +23,7 @@ export type Artist = {
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const fetchArtists = async (): Promise<Artist[]> => {
-  const response = await axios.get(
-    `${API_BASE_URL}/wp-json/omeruta/v1/artists`
-  );
+  const response = await axios.get(`${API_BASE_URL}/artists`);
   return response.data;
 };
 
