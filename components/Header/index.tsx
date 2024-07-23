@@ -51,9 +51,9 @@ export const Header: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <CamartIntro variant="h4">
+            {/* <CamartIntro variant="h4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </CamartIntro>
+            </CamartIntro> */}
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}

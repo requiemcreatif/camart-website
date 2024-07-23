@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Box, Container, Grow, CircularProgress } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -25,8 +26,10 @@ import {
 
 const ArtistSection: React.FC = () => {
   const [hoveredArtist, setHoveredArtist] = useState<number | null>(null);
+  const router = useRouter();
 
   const { data: artists, isLoading, isError, error } = useArtistData();
+  console.log("artist", artists);
 
   if (isLoading)
     return (
@@ -39,6 +42,10 @@ const ArtistSection: React.FC = () => {
   if (!artists || artists.length === 0)
     return <Container>No artists found</Container>;
 
+  const handleArtistClick = (artistId: number) => {
+    console.log("artistId", artistId);
+    router.push(`/artist/${artistId}`);
+  };
   return (
     <ArtistSectionWrapper id="menu-about">
       <Container sx={{ mt: 3 }}>
@@ -50,6 +57,8 @@ const ArtistSection: React.FC = () => {
                 key={artist.id}
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                //onClick={() => handleArtistClick(artist.id)}
+                style={{ cursor: "pointer" }}
               >
                 <ArtistSectionCard
                   onMouseEnter={() => setHoveredArtist(artist.id)}
@@ -92,7 +101,10 @@ const ArtistSection: React.FC = () => {
                       {formatText(artist.shortBio)}
                     </ArtistDescription>
                     <ActionContainer>
-                      <ReadMoreButton variant="contained">
+                      <ReadMoreButton
+                        onClick={() => handleArtistClick(artist.id)}
+                        variant="contained"
+                      >
                         Leer más
                       </ReadMoreButton>
                       <Box>

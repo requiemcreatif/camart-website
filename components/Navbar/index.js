@@ -65,17 +65,19 @@ export const Navbar = () => {
     <NavWrapper isscrolled={isScrolled.toString()}>
       <Container>
         <NavbarContainer>
-          <NavLogo isscrolled={isScrolled.toString()}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: "bold",
-                fontSize: "1.2rem",
-              }}
-            >
-              CamART
-            </Typography>
-          </NavLogo>
+          <Link href="/">
+            <NavLogo isscrolled={isScrolled.toString()} h>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: "1.2rem",
+                }}
+              >
+                CamART
+              </Typography>
+            </NavLogo>
+          </Link>
           <DesktopMenu>
             {menuItems.map((item) => (
               <li key={item.id}>

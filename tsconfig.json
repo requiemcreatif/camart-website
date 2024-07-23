@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     "data/camartData.js",
-    "utils/parseImageUrl.js"
+    "utils/parseImageUrl.js",
+    "app/layout.js"
   ],
   "exclude": ["node_modules"]
 }

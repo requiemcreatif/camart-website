@@ -2,10 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    domains: ["www.api-omeruta.com", "api-omeruta.com"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "www.api-omeruta.com",
+      },
+      {
+        protocol: "https",
+        hostname: "api-omeruta.com",
       },
       {
         protocol: "https",
@@ -32,15 +37,19 @@ const nextConfig = {
     return [
       {
         source: "/wp-json/:path*",
-        destination: `${
-          process.env.NEXT_PUBLIC_BACKEND_URL || "https://api-omeruta.com/"
-        }wp-json/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}wp-json/:path*`,
       },
       {
         source: "/wp-content/:path*",
-        destination: `${
-          process.env.NEXT_PUBLIC_BACKEND_URL || "https://api-omeruta.com/"
-        }wp-content/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}wp-content/:path*`,
+      },
+      {
+        source: "/api/artists",
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
+      },
+      {
+        source: "/api/artists/:id",
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists/:id`,
       },
     ];
   },

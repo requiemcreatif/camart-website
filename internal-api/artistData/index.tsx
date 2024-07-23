@@ -22,10 +22,13 @@ export type Artist = {
   social: SocialMediaLinks;
 };
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
 const fetchArtists = async (): Promise<Artist[]> => {
-  const response = await axios.get(`${API_BASE_URL}/artists`);
+  const response = await axios.get(`/api/artists`);
+  return response.data;
+};
+
+export const fetchArtist = async (id: number): Promise<Artist> => {
+  const response = await axios.get(`/api/artists/${id}`);
   return response.data;
 };
 
@@ -33,5 +36,12 @@ export const useArtistData = () => {
   return useQuery<Artist[], Error>({
     queryKey: ["artists"],
     queryFn: fetchArtists,
+  });
+};
+
+export const useArtistDetail = (id: number) => {
+  return useQuery<Artist, Error>({
+    queryKey: ["artists", id],
+    queryFn: () => fetchArtist(id),
   });
 };
