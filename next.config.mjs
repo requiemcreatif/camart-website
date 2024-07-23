@@ -2,8 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["www.api-omeruta.com"],
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api-omeruta.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.api-omeruta.com",
+      },
       {
         protocol: "https",
         hostname:
