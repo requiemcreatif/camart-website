@@ -1,15 +1,15 @@
-// File: components/ArtistSection.tsx
-
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Grow, CircularProgress } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { parseImageUrl } from "@/utils/parseImageUrl";
+import { parseImageUrl } from "../../utils/parseImageUrl";
 import { formatText } from "@/utils/formatText";
-import { getArtistsData, Artist } from "@/lib/useArtistData";
+import { useArtistData, Artist } from "@/internal-api/artistData";
 import {
   ArtistSectionWrapper,
   ArtistSectionTitle,
@@ -23,90 +23,118 @@ import {
   SocialIconButton,
 } from "./styles";
 
-export default async function ArtistSection() {
-  let artists: Artist[];
-  try {
-    artists = await getArtistsData();
-  } catch (error) {
-    console.error("Failed to fetch artists:", error);
-    return <div>Error loading artists. Please try again later.</div>;
-  }
+const ArtistSection: React.FC = () => {
+  const [hoveredArtist, setHoveredArtist] = useState<number | null>(null);
 
-  if (!artists || artists.length === 0) {
-    return <div>No artists found.</div>;
-  }
+  const { data: artists, isLoading, isError, error } = useArtistData();
+
+  if (isLoading)
+    return (
+      <Container>
+        <CircularProgress />
+      </Container>
+    );
+  if (isError)
+    return <Container>Error fetching artists: {error.message}</Container>;
+  if (!artists || artists.length === 0)
+    return <Container>No artists found</Container>;
 
   return (
     <ArtistSectionWrapper id="menu-about">
       <Container sx={{ mt: 3 }}>
         <ArtistSectionTitle variant="h4">ARTISTAS CAMART</ArtistSectionTitle>
-        {artists.map((artist: Artist) => (
-          <div key={artist.id}>
-            <ArtistSectionCard>
-              <ArtistImageContainer>
-                {artist.imageUrl ? (
-                  <Image
-                    src={`${parseImageUrl(artist.imageUrl)}`}
-                    alt={artist.name}
-                    priority
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: "#f0f0f0",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    No Image Available
-                  </div>
-                )}
-              </ArtistImageContainer>
-              <ArtistContentContainer>
-                <ArtistName
-                  variant="h5"
-                  sx={{
-                    textTransform: "uppercase",
-                  }}
+        {artists &&
+          artists.map((artist: Artist) => {
+            return (
+              <motion.div
+                key={artist.id}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <ArtistSectionCard
+                  onMouseEnter={() => setHoveredArtist(artist.id)}
+                  onMouseLeave={() => setHoveredArtist(null)}
                 >
-                  {artist.name}
-                </ArtistName>
-                <ArtistDescription variant="body1">
-                  {formatText(artist.shortBio)}
-                </ArtistDescription>
-                <ActionContainer>
-                  <ReadMoreButton variant="contained">Leer más</ReadMoreButton>
-                  <Box>
-                    {["instagram", "twitter", "facebook"].map((social) => (
-                      <Link
-                        key={social}
-                        href={
-                          artist.social[social as keyof typeof artist.social] ||
-                          `https://www.${social}.com/`
-                        }
-                        passHref
-                        target="_blank"
-                        rel="noopener noreferrer"
+                  <ArtistImageContainer>
+                    {artist?.imageUrl ? (
+                      <Image
+                        src={parseImageUrl(artist.imageUrl)}
+                        alt={artist.name}
+                        priority
+                        fill
+                        style={{ objectFit: "cover" }}
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          backgroundColor: "#f0f0f0",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
                       >
-                        <SocialIconButton>
-                          {social === "instagram" && <InstagramIcon />}
-                          {social === "twitter" && <TwitterIcon />}
-                          {social === "facebook" && <FacebookIcon />}
-                        </SocialIconButton>
-                      </Link>
-                    ))}
-                  </Box>
-                </ActionContainer>
-              </ArtistContentContainer>
-            </ArtistSectionCard>
-          </div>
-        ))}
+                        No Image Available
+                      </div>
+                    )}
+                  </ArtistImageContainer>
+                  <ArtistContentContainer>
+                    <ArtistName
+                      variant="h5"
+                      sx={{
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {artist.name}
+                    </ArtistName>
+                    <ArtistDescription variant="body1">
+                      {formatText(artist.shortBio)}
+                    </ArtistDescription>
+                    <ActionContainer>
+                      <ReadMoreButton variant="contained">
+                        Leer más
+                      </ReadMoreButton>
+                      <Box>
+                        {["instagram", "twitter", "facebook"].map(
+                          (social, index) => (
+                            <Grow
+                              in={hoveredArtist === artist.id}
+                              key={social}
+                              style={{ transformOrigin: "0 0 0" }}
+                              {...(hoveredArtist === artist.id
+                                ? { timeout: 1000 + index * 200 }
+                                : {})}
+                            >
+                              <Link
+                                href={
+                                  artist.social[
+                                    social as keyof typeof artist.social
+                                  ] || `https://www.${social}.com/`
+                                }
+                                passHref
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <SocialIconButton>
+                                  {social === "instagram" && <InstagramIcon />}
+                                  {social === "twitter" && <TwitterIcon />}
+                                  {social === "facebook" && <FacebookIcon />}
+                                </SocialIconButton>
+                              </Link>
+                            </Grow>
+                          )
+                        )}
+                      </Box>
+                    </ActionContainer>
+                  </ArtistContentContainer>
+                </ArtistSectionCard>
+              </motion.div>
+            );
+          })}
       </Container>
     </ArtistSectionWrapper>
   );
-}
+};
+
+export default ArtistSection;

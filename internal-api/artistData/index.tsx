@@ -1,28 +1,37 @@
-// File: hooks/useArtistData.ts
+// File: internal-api/useArtistData.ts
 
-import { use } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
-export type Artist = {
-  id: string;
-  name: string;
-  shortBio: string;
-  longBio?: string;
-  imageUrl: string;
-  social: {
-    instagram: string;
-    twitter: string;
-    facebook: string;
-  };
+// Define the SocialMediaLinks type for social media URLs
+type SocialMediaLinks = {
+  instagram: string;
+  twitter: string;
+  facebook: string;
+  spotify: string;
 };
 
-async function fetchArtists(): Promise<Artist[]> {
-  const res = await fetch("/api/artists");
-  if (!res.ok) {
-    throw new Error("Failed to fetch artists");
-  }
-  return res.json();
-}
+// Define the Artist type with expected properties
+export type Artist = {
+  id: number;
+  name: string;
+  content: string;
+  shortBio: string;
+  fullBio: string;
+  imageUrl: string | null;
+  social: SocialMediaLinks;
+};
 
-export function useArtistData() {
-  return use(fetchArtists());
-}
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+const fetchArtists = async (): Promise<Artist[]> => {
+  const response = await axios.get(`${API_BASE_URL}/artists`);
+  return response.data;
+};
+
+export const useArtistData = () => {
+  return useQuery<Artist[], Error>({
+    queryKey: ["artists"],
+    queryFn: fetchArtists,
+  });
+};
