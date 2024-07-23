@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-// Define the SocialMediaLinks type for social media URLs
+// Define SocialMediaLinks type for social media URLs
 type SocialMediaLinks = {
   instagram: string;
   twitter: string;
@@ -11,7 +11,7 @@ type SocialMediaLinks = {
   spotify: string;
 };
 
-// Define the Artist type with expected properties
+// Define Artist type with expected properties
 export type Artist = {
   id: number;
   name: string;
