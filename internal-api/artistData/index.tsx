@@ -21,10 +21,25 @@ export type Artist = {
 };
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const fetchArtists = async (): Promise<Artist[]> => {
-  const response = await axios.get(`${API_BASE_URL}/artists`);
-  return response.data;
+  if (!API_BASE_URL && !BACKEND_URL) {
+    console.error("API_BASE_URL and BACKEND_URL are not set");
+    throw new Error("API URL is not configured");
+  }
+
+  const url = `${API_BASE_URL || BACKEND_URL}/artists`;
+  console.log("Fetching artists from:", url);
+
+  try {
+    const response = await axios.get(url);
+    console.log("Artists data received:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching artists:", error);
+    throw error;
+  }
 };
 
 export const useArtistData = () => {
