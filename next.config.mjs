@@ -5,10 +5,6 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "api-omeruta.com",
-      },
-      {
-        protocol: "https",
         hostname: "www.api-omeruta.com",
       },
       {
