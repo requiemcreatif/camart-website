@@ -28,7 +28,7 @@ const ArtistDetail: React.FC<ArtistDetailProps> = ({ artist, onBackClick }) => {
   return (
     <>
       <ReadMoreButton onClick={onBackClick} variant="contained" sx={{ mb: 3 }}>
-        Back to Artists
+        Volver a la lista
       </ReadMoreButton>
       <ArtistSectionCard>
         <ArtistImageContainer>

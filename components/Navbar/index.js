@@ -15,7 +15,6 @@ import {
   MobileMenuList,
   MobileMenuItem,
 } from "./styles";
-//import CamartLogo from "../../public/images/cam_art_logo_white.png";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,7 +53,7 @@ export const Navbar = () => {
 
   const menuItems = [
     { id: "menu-home", label: "Home" },
-    { id: "menu-about", label: "About" },
+    { id: "menu-about", label: "Artistas" },
     { id: "menu-noticias", label: "Noticias" },
     { id: "menu-contacto", label: "Contacto" },
   ];

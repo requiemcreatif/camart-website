@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 import { Header } from "../Header";
 import { HeroContainer, ImageContentCover } from "./styles";
-import CamHeroImage from "../../public/images/cam95.jpg";
 
 export const CamHero = () => {
   return (

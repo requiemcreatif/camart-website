@@ -84,7 +84,7 @@ const ArtistList: React.FC<ArtistListProps> = ({
                 {artist.name}
               </ArtistName>
               <ArtistDescription variant="body1">
-                {formatText(artist.shortBio)}
+                {formatText(artist.shortBio, 170)}
               </ArtistDescription>
               <ActionContainer>
                 <ReadMoreButton

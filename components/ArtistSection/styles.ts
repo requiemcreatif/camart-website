@@ -62,6 +62,8 @@ export const ArtistName = styled(Typography)`
 
 export const ArtistDescription = styled(Typography)`
   color: #ccc;
+  font-weight: 300;
+  font-size: 0.9rem;
   margin-bottom: 24px;
 `;
 

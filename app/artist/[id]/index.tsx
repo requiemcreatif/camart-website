@@ -6,8 +6,6 @@ import axios from "axios";
 import { Artist } from "@/internal-api/artistData";
 import { CircularProgress, Grid, IconButton } from "@mui/material";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { parseImageUrl } from "@/utils/parseImageUrl";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -15,14 +13,11 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 import ArtistPageWrapper from "@/components/ArtistPageWrapper";
 import {
-  PageWrapper,
   StyledContainer,
   ArtistPaper,
   ImageContainer,
   ArtistName,
-  ArtistShortBio,
   SocialIconsContainer,
-  BiographyTitle,
   BiographyText,
 } from "./styles";
 

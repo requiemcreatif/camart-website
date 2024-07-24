@@ -1,6 +1,5 @@
-import { Inter, Roboto } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { ReactQueryProviders } from "./react-query-provider";
-import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 const roboto = Roboto({

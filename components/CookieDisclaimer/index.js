@@ -15,7 +15,6 @@ const CookieDisclaimer = () => {
         bottom: 0,
         left: 0,
         right: 0,
-        //backgroundColor: "#cf2e2e", // Red background
         backgroundColor: "#fff", // Red background
         color: "#000",
         padding: "16px",
@@ -50,11 +49,8 @@ const CookieDisclaimer = () => {
         <Button
           variant="contained"
           color="inherit"
-          //size="small"
-
           onClick={() => setIsVisible(false)}
           sx={{
-            //color: "#cf2e2e",
             color: "#fff",
             backgroundColor: "#000",
             textTransform: "none",
@@ -67,10 +63,8 @@ const CookieDisclaimer = () => {
         <Button
           variant="contained"
           color="inherit"
-          //size="small"
           onClick={() => setIsVisible(false)}
           sx={{
-            //color: "#cf2e2e",
             color: "#fff",
             backgroundColor: "#000",
             textTransform: "none",
@@ -83,12 +77,8 @@ const CookieDisclaimer = () => {
         <Button
           variant="contained"
           color="inherit"
-          //size="small"
-          onClick={() => {
-            /* Implement cookie choices logic */
-          }}
+          onClick={() => {}}
           sx={{
-            //color: "#cf2e2e",
             color: "#fff",
             backgroundColor: "#000",
             textTransform: "none",

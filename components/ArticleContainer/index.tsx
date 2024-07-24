@@ -1,4 +1,3 @@
-// ArticleContainer.tsx
 "use client";
 import React, { useState } from "react";
 import { Box, Button, Container, Typography } from "@mui/material";

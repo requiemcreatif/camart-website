@@ -1,4 +1,3 @@
-// Card.tsx (updated)
 import React from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
@@ -47,7 +46,7 @@ const Card: React.FC<CardProps> = ({
             my: 1,
           }}
         >
-          {title && formatText(title, 40)}
+          {title && formatText(title, 20)}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {(excerpt && formatText(excerpt, 90)) || ""}
