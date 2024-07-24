@@ -13,6 +13,7 @@ export const ImageContainer = styled(Box)`
 `;
 
 export const CardContainer = styled(Box)`
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   background-color: #fff;
@@ -21,6 +22,7 @@ export const CardContainer = styled(Box)`
 
   &:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
   }
 `;
 
@@ -31,4 +33,11 @@ export const ImageBox = styled(Box)`
 
 export const CardDescription = styled(Box)`
   padding: 16px;
+`;
+
+export const ButtonContainer = styled(Box)`
+  z-index: 10;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 `;
