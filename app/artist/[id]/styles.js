@@ -9,8 +9,9 @@ export const PageWrapper = styled(Box)`
 `;
 
 export const StyledContainer = styled(Container)`
+  margin-top: 16px;
   padding-top: 64px;
-  padding-bottom: 64px;
+  //padding-bottom: 64px;
 `;
 
 export const ArtistPaper = styled(Paper)`

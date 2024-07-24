@@ -1,5 +1,3 @@
-// File: internal-api/useArtistData.ts
-
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 

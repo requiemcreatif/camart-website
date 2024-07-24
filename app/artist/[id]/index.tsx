@@ -28,7 +28,6 @@ import {
 
 const fetchArtist = async (id: string): Promise<Artist> => {
   const response = await axios.get(`/api/artists/${id}`);
-  console.log("response", response);
   return response.data;
 };
 

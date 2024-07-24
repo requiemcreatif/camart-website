@@ -51,6 +51,10 @@ const nextConfig = {
         source: "/api/artists/:id",
         destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists/:id`,
       },
+      {
+        source: "/api/posts",
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/posts`,
+      },
     ];
   },
 };
