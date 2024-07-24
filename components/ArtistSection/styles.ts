@@ -1,7 +1,6 @@
 "use client";
 import {
   styled,
-  Container,
   Box,
   Typography,
   Button,
@@ -76,7 +75,6 @@ export const ReadMoreButton = styled(Button)`
   text-transform: none;
   padding: 8px 32px;
   border-radius: 25px;
-  //background-color: #1976d2;
   cursor: pointer;
   background-color: #40679e;
   &:hover {
@@ -87,4 +85,10 @@ export const ReadMoreButton = styled(Button)`
 export const SocialIconButton = styled(IconButton)<IconButtonProps>`
   color: #1976d2;
   margin-left: 8px;
+`;
+
+export const BiographyText = styled(Box)`
+  font-weight: 300;
+  color: #ccc;
+  margin-top: 16px;
 `;

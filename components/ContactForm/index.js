@@ -1,10 +1,9 @@
+"use client";
 import React from "react";
 import {
   Box,
   Typography,
-  TextField,
   Button,
-  Container,
   Grid,
   Checkbox,
   FormControlLabel,
@@ -14,26 +13,22 @@ import { camartData } from "@/data/camartData";
 import { ContactFormWrapper, ContactTextField } from "./styles";
 
 const ContactForm = () => {
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // Handle form submission here
-  // };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission here
+  };
 
   return (
     <Box
       sx={{
         backgroundColor: "#131313",
-        //padding: "40px 0",
         color: "#9f9fa4",
       }}
       id="menu-contacto"
     >
       <ContactFormWrapper>
         <Box>
-          {/* <Typography variant="h4" component="h1" gutterBottom>
-            Contactanos
-          </Typography> */}
-          <form /*onSubmit={handleSubmit}*/>
+          <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <ContactTextField
@@ -91,7 +86,7 @@ const ContactForm = () => {
           </form>
         </Box>
         <Box>
-          <Typography variant="body2" color="#9f9fa4" /*sx={{ mt: 2 }}*/>
+          <Typography variant="body2" color="#9f9fa4">
             {camartData.contactIformation}
           </Typography>
           <Button color="primary" size="small">

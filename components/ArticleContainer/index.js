@@ -8,7 +8,6 @@ import { ImageContentWrapper, ImageContainer } from "./styles";
 
 export default function ArticleContainer() {
   const { data: cardData, isLoading, isError, error } = usePosts();
-  console.log("posts", cardData);
   const [visibleCards, setVisibleCards] = useState(4);
 
   const loadMore = () => {

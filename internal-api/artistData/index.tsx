@@ -37,9 +37,17 @@ export const useArtistData = () => {
   });
 };
 
-export const useArtistDetail = (id: number) => {
+// export const useArtistDetail = (id: number) => {
+//   return useQuery<Artist, Error>({
+//     queryKey: ["artists", id],
+//     queryFn: () => fetchArtist(id),
+//   });
+// };
+
+export const useArtistDetail = (id: number | null) => {
   return useQuery<Artist, Error>({
     queryKey: ["artists", id],
-    queryFn: () => fetchArtist(id),
+    queryFn: () => (id ? fetchArtist(id) : Promise.resolve(null)),
+    enabled: id !== null,
   });
 };
