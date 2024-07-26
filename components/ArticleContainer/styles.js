@@ -32,7 +32,7 @@ export const ImageBox = styled(Box)`
 `;
 
 export const CardDescription = styled(Box)`
-  padding: 16px;
+  padding: 16px 24px;
 `;
 
 export const ButtonContainer = styled(Box)`

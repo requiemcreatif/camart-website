@@ -4,6 +4,7 @@
 
 .wp-block-heading {
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1.5em;
   padding: 10px;
+  font-weight: bold;
 }
