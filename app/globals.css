@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 .wp-block-heading {
-  /* color: brown; */
   text-align: center;
   font-size: 1.2em;
   padding: 10px;

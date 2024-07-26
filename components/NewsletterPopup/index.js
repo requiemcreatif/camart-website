@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
@@ -11,12 +12,13 @@ import {
   IconButton,
   ThemeProvider,
   createTheme,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CamartLogo from "../../public/images/cam_art_logo_white.png";
-import { palette } from "@mui/system";
 
-const darkTheme = createTheme({
+const theme = createTheme({
   palette: {
     mode: "dark",
     primary: {
@@ -27,19 +29,53 @@ const darkTheme = createTheme({
       paper: "#131313",
     },
   },
+  components: {
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: 16,
+          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+          backdropFilter: "blur(5px)",
+          WebkitBackdropFilter: "blur(5px)",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 8,
+          },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          textTransform: "none",
+          fontWeight: 600,
+        },
+      },
+    },
+  },
 });
 
 const NewsletterPopup = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [hasShown, setHasShown] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
   useEffect(() => {
     if (!hasShown) {
       const timer = setTimeout(() => {
         setOpen(true);
         setHasShown(true);
-      }, 10000); // 5000 milliseconds = 5 seconds
+      }, 10000);
 
       return () => clearTimeout(timer);
     }
@@ -49,21 +85,48 @@ const NewsletterPopup = () => {
     setOpen(false);
   };
 
-  const handleSubscribe = () => {
-    // Handle subscription logic here
-    console.log("Subscribed with email:", email);
-    handleClose();
+  const handleSubscribe = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/newsletter-subscribe`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSnackbarMessage("¡Suscrito con éxito!");
+        setSnackbarSeverity("success");
+        setOpen(false);
+      } else {
+        setSnackbarMessage(
+          data.message || "Ocurrió un error. Por favor, inténtalo de nuevo."
+        );
+        setSnackbarSeverity("error");
+      }
+    } catch (error) {
+      console.error("Error de suscripción al boletín:", error);
+      setSnackbarMessage("Ocurrió un error. Por favor, inténtalo de nuevo.");
+      setSnackbarSeverity("error");
+    }
+
+    setSnackbarOpen(true);
   };
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <Dialog
         open={open}
         onClose={handleClose}
         PaperProps={{
           sx: {
-            backgroundColor: "background.default",
-            boxShadow: "none",
+            backgroundColor: "rgba(19, 19, 19, 0.8)",
             maxWidth: "400px",
           },
         }}
@@ -85,7 +148,7 @@ const NewsletterPopup = () => {
             display="flex"
             flexDirection="column"
             alignItems="center"
-            gap={2}
+            gap={3}
             py={4}
           >
             <Box width={100} height={80} position="relative">
@@ -96,10 +159,10 @@ const NewsletterPopup = () => {
                 objectFit="contain"
               />
             </Box>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography variant="h5" align="center" fontWeight="bold">
               SUSCRÍBETE A NUESTRA NEWSLETTER
             </Typography>
-            <Typography variant="body2" align="center" gutterBottom>
+            <Typography variant="body2" align="center">
               ¡Mantente actualizado con las últimas noticias, lanzamientos y
               ofertas exclusivas de CamART!
             </Typography>
@@ -116,7 +179,7 @@ const NewsletterPopup = () => {
               color="primary"
               fullWidth
               onClick={handleSubscribe}
-              sx={{ mt: 2, backgroundColor: "#cf2e2e" }}
+              sx={{ mt: 2 }}
             >
               SUSCRIBIRSE
             </Button>
@@ -131,6 +194,20 @@ const NewsletterPopup = () => {
           </Box>
         </DialogContent>
       </Dialog>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity={snackbarSeverity}
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 };
