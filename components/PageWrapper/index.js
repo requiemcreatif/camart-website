@@ -11,7 +11,7 @@ import ArtistSection from "../ArtistSection";
 export const PageWrapper = () => {
   return (
     <Box>
-      {/* <NewsletterPopup /> */}
+      <NewsletterPopup />
       <Navbar />
       <Header />
       <ArtistSection />
