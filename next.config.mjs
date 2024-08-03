@@ -2,22 +2,22 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["www.api-omeruta.com", "api-omeruta.com"],
+    //domains: ["www.backend.camart.es", "backend.camart.es"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "www.api-omeruta.com",
+        hostname: "www.backend.camart.es",
       },
       {
         protocol: "https",
-        hostname: "api-omeruta.com",
+        hostname: "backend.camart.es",
       },
       {
         protocol: "https",
         hostname:
           (process.env.NEXT_PUBLIC_ASSET_BASE_URL || "")
             .replace(/^https?:\/\//, "")
-            .replace(/\/$/, "") || "api-omeruta.com",
+            .replace(/\/$/, "") || "backend.camart.es",
       },
       {
         protocol: "https",
@@ -37,15 +37,16 @@ const nextConfig = {
     return [
       {
         source: "/wp-json/:path*",
-        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}wp-json/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/wp-json/:path*`,
       },
       {
         source: "/wp-content/:path*",
-        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}wp-content/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/wp-content/:path*`,
       },
       {
         source: "/api/artists",
-        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
+        //destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
+        destination: `https://backend.camart.es/wp-json/camart/v1/artists`,
       },
       {
         source: "/api/artists/:id",
