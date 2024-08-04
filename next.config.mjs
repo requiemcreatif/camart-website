@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    //domains: ["www.backend.camart.es", "backend.camart.es"],
+    domains: ["www.backend.camart.es", "backend.camart.es", "localhost"],
     remotePatterns: [
       {
         protocol: "https",
@@ -45,8 +45,7 @@ const nextConfig = {
       },
       {
         source: "/api/artists",
-        //destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
-        destination: `https://backend.camart.es/wp-json/camart/v1/artists`,
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
       },
       {
         source: "/api/artists/:id",
@@ -55,6 +54,11 @@ const nextConfig = {
       {
         source: "/api/posts",
         destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/posts`,
+      },
+      {
+        source: "/api/contact",
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/contact`,
+        //destination: `https://backend.camart.es/wp-json/camart/v1/contact`,
       },
     ];
   },

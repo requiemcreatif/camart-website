@@ -69,6 +69,7 @@ const NewsletterPopup = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   useEffect(() => {
     if (!hasShown) {
@@ -101,22 +102,26 @@ const NewsletterPopup = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setSnackbarMessage("¡Suscrito con éxito!");
-        setSnackbarSeverity("success");
+        setConfirmationOpen(true);
         setOpen(false);
+        setEmail("");
       } else {
         setSnackbarMessage(
           data.message || "Ocurrió un error. Por favor, inténtalo de nuevo."
         );
         setSnackbarSeverity("error");
+        setSnackbarOpen(true);
       }
     } catch (error) {
       console.error("Error de suscripción al boletín:", error);
       setSnackbarMessage("Ocurrió un error. Por favor, inténtalo de nuevo.");
       setSnackbarSeverity("error");
+      setSnackbarOpen(true);
     }
+  };
 
-    setSnackbarOpen(true);
+  const handleCloseConfirmation = () => {
+    setConfirmationOpen(false);
   };
 
   return (
@@ -208,6 +213,50 @@ const NewsletterPopup = () => {
           {snackbarMessage}
         </Alert>
       </Snackbar>
+      <Dialog
+        open={confirmationOpen}
+        onClose={handleCloseConfirmation}
+        PaperProps={{
+          sx: {
+            backgroundColor: "rgba(19, 19, 19, 0.8)",
+            maxWidth: "400px",
+          },
+        }}
+      >
+        <DialogContent>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap={3}
+            py={4}
+          >
+            <Box width={100} height={80} position="relative">
+              <Image
+                src={CamartLogo}
+                alt="CamArt Logo"
+                layout="fill"
+                objectFit="contain"
+              />
+            </Box>
+            <Typography variant="h5" align="center" fontWeight="bold">
+              ¡Gracias por suscribirte!
+            </Typography>
+            <Typography variant="body2" align="center">
+              Te has suscrito exitosamente a nuestra newsletter. Pronto
+              recibirás las últimas noticias y ofertas exclusivas de CamART.
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleCloseConfirmation}
+              sx={{ mt: 2 }}
+            >
+              Cerrar
+            </Button>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </ThemeProvider>
   );
 };
