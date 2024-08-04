@@ -18,6 +18,9 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import CamartLogo from "../../public/images/cam_art_logo_white.png";
 
+// Define a type for Snackbar severity
+type SnackbarSeverity = "success" | "error" | "warning" | "info";
+
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -62,14 +65,15 @@ const theme = createTheme({
   },
 });
 
-const NewsletterPopup = () => {
-  const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [hasShown, setHasShown] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-  const [confirmationOpen, setConfirmationOpen] = useState(false);
+const NewsletterPopup: React.FC = () => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [hasShown, setHasShown] = useState<boolean>(false);
+  const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
+  const [snackbarMessage, setSnackbarMessage] = useState<string>("");
+  const [snackbarSeverity, setSnackbarSeverity] =
+    useState<SnackbarSeverity>("success");
+  const [confirmationOpen, setConfirmationOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!hasShown) {

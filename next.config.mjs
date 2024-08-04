@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["www.backend.camart.es", "backend.camart.es", "localhost"],
     remotePatterns: [
       {
         protocol: "https",
@@ -11,6 +10,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "backend.camart.es",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
       },
       {
         protocol: "https",
@@ -58,7 +61,6 @@ const nextConfig = {
       {
         source: "/api/contact",
         destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/contact`,
-        //destination: `https://backend.camart.es/wp-json/camart/v1/contact`,
       },
     ];
   },

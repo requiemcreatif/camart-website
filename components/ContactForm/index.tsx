@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
 import axios from "axios";
 import {
@@ -14,7 +14,6 @@ import {
   DialogContent,
   IconButton,
   ThemeProvider,
-  useTheme,
   createTheme,
   NoSsr,
 } from "@mui/material";
@@ -67,25 +66,34 @@ const theme = createTheme({
   },
 });
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({
+// Define a type for form data
+interface FormData {
+  name: string;
+  lastname: string;
+  email: string;
+  message: string;
+  newsletter: boolean;
+}
+
+const ContactForm: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     lastname: "",
     email: "",
     message: "",
     newsletter: false,
   });
-  const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [confirmationOpen, setConfirmationOpen] = useState<boolean>(false);
 
-  const handleChange = (event) => {
-    const { name, value, checked } = event.target;
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, checked, type } = event.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "newsletter" ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
       const response = await axios.post(`/api/contact`, formData);
@@ -105,7 +113,7 @@ const ContactForm = () => {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      if (error.response) {
+      if (axios.isAxiosError(error) && error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
         console.error(error.response.data);
