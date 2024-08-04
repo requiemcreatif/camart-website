@@ -66,7 +66,6 @@ const theme = createTheme({
   },
 });
 
-// Define a type for form data
 interface FormData {
   name: string;
   lastname: string;
@@ -84,6 +83,8 @@ const ContactForm: React.FC = () => {
     newsletter: false,
   });
   const [confirmationOpen, setConfirmationOpen] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked, type } = event.target;
@@ -95,8 +96,11 @@ const ContactForm: React.FC = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
+
     try {
-      const response = await axios.post(`/api/contact`, formData);
+      const response = await axios.post("/api/contact", formData);
 
       if (response.status === 200) {
         console.log("Form submitted successfully:", response.data);
@@ -114,19 +118,15 @@ const ContactForm: React.FC = () => {
     } catch (error) {
       console.error("Error submitting form:", error);
       if (axios.isAxiosError(error) && error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.error(error.response.data);
-        console.error(error.response.status);
-        console.error(error.response.headers);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.error(error.request);
+        setError(
+          error.response.data.message ||
+            "An error occurred while submitting the form."
+        );
       } else {
-        // Something happened in setting up the request that triggered an Error
-        console.error("Error", error.message);
+        setError("An unexpected error occurred. Please try again later.");
       }
-      // Here you might want to set some state to show an error message to the user
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -214,6 +214,13 @@ const ContactForm: React.FC = () => {
                     label="Acepto recibir noticias, fechas de gira y ofertas especiales."
                   />
                 </Grid>
+                {error && (
+                  <Grid item xs={12}>
+                    <Typography color="error" variant="body2">
+                      {error}
+                    </Typography>
+                  </Grid>
+                )}
                 <Grid item xs={12}>
                   <Button
                     type="submit"
@@ -221,8 +228,9 @@ const ContactForm: React.FC = () => {
                     color="primary"
                     fullWidth
                     sx={{ backgroundColor: "#a91d3a" }}
+                    disabled={isSubmitting}
                   >
-                    Enviar
+                    {isSubmitting ? "Enviando..." : "Enviar"}
                   </Button>
                 </Grid>
               </Grid>
