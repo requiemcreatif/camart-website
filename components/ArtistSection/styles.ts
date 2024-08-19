@@ -39,10 +39,10 @@ export const ArtistImageContainer = styled(Box)`
   position: relative;
   width: 100%;
   height: 300px;
-
   @media (min-width: 900px) {
     width: 40%;
     height: auto;
+    //min-height: 400px; // Ensure there's enough space for the image and player
   }
 `;
 
@@ -94,3 +94,10 @@ export const BiographyText = styled(Box)`
   color: #ccc;
   margin-top: 16px;
 `;
+
+export const SpotifyPlayerContainer = styled(Box)(({ theme }) => ({
+  marginTop: theme.spacing(4),
+  [theme.breakpoints.down("md")]: {
+    marginTop: theme.spacing(6),
+  },
+}));

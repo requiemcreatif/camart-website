@@ -9,6 +9,11 @@ type SocialMediaLinks = {
   spotify: string;
 };
 
+// Define SpotifyList type
+type SpotifyList = {
+  [key: string]: string;
+};
+
 // Define Artist type with expected properties
 export type Artist = {
   id: number;
@@ -18,6 +23,8 @@ export type Artist = {
   fullBio: string;
   imageUrl: string | null;
   social: SocialMediaLinks;
+  spotifyList: SpotifyList; // Add spotifyList property to Artist type
+  youtubeList: { [key: string]: string }; // Add youtubeList property to Artist type
 };
 
 const fetchArtists = async (): Promise<Artist[]> => {
