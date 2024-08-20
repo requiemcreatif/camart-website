@@ -1,3 +1,5 @@
+// components/ArtistSection/index.tsx
+
 "use client";
 import React, { useState } from "react";
 import { Container } from "@mui/material";

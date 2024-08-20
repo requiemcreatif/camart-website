@@ -1,3 +1,5 @@
+// components/CamHero/styles.ts
+
 "use client";
 import { styled, Box } from "@mui/material";
 

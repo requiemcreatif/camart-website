@@ -1,9 +1,13 @@
+// components/Navbar/index.tsx
+
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { Container, Typography, IconButton } from "@mui/material";
+import { Container, Typography, IconButton, useTheme } from "@mui/material";
+import ThemeToggle from "../ThemeToggleProps";
+import { useThemeToggle } from "../ThemeContext";
 import {
   NavWrapper,
   NavbarContainer,
@@ -16,31 +20,35 @@ import {
   MobileMenuItem,
 } from "./styles";
 
-export const Navbar = () => {
+interface MenuItem {
+  id: string;
+  label: string;
+}
+
+export const Navbar: React.FC = () => {
+  const toggleTheme = useThemeToggle();
+  console.log("Navbar rendered, toggleTheme:", toggleTheme);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleLinkClick = (event, id) => {
+  const handleLinkClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
     event.preventDefault();
     const element = document.getElementById(id);
     if (element) {
@@ -51,27 +59,29 @@ export const Navbar = () => {
     }
   };
 
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { id: "menu-home", label: "Home" },
     { id: "menu-about", label: "Artistas" },
     { id: "menu-noticias", label: "Noticias" },
     { id: "menu-contacto", label: "Contacto" },
   ];
 
-  const iconColor = isScrolled ? "#000000" : "#ffffff";
+  const iconColor = isScrolled ? theme.palette.text.primary : "#ffffff";
+
+  const handleThemeToggle = () => {
+    console.log("Theme toggle clicked in Navbar");
+    toggleTheme();
+  };
 
   return (
-    <NavWrapper isscrolled={isScrolled.toString()}>
+    <NavWrapper $isScrolled={isScrolled}>
       <Container>
         <NavbarContainer>
           <Link href="/">
-            <NavLogo isscrolled={isScrolled.toString()} h>
+            <NavLogo $isScrolled={isScrolled}>
               <Typography
                 variant="h6"
-                sx={{
-                  fontWeight: "bold",
-                  fontSize: "1.2rem",
-                }}
+                sx={{ fontWeight: "bold", fontSize: "1.2rem" }}
               >
                 CamART
               </Typography>
@@ -80,7 +90,7 @@ export const Navbar = () => {
           <DesktopMenu>
             {menuItems.map((item) => (
               <li key={item.id}>
-                <NavLink isscrolled={isScrolled.toString()}>
+                <NavLink $isScrolled={isScrolled}>
                   <Link
                     href={`#${item.id}`}
                     onClick={(e) => handleLinkClick(e, item.id)}
@@ -90,6 +100,9 @@ export const Navbar = () => {
                 </NavLink>
               </li>
             ))}
+            <li>
+              <ThemeToggle />
+            </li>
           </DesktopMenu>
           <MobileMenuIcon>
             <IconButton
@@ -109,7 +122,7 @@ export const Navbar = () => {
         anchor="right"
         open={isMobileMenuOpen}
         onClose={toggleMobileMenu}
-        isscrolled={isScrolled.toString()}
+        $isScrolled={isScrolled}
       >
         <IconButton
           sx={{ alignSelf: "flex-end", margin: "10px" }}
@@ -119,7 +132,7 @@ export const Navbar = () => {
         </IconButton>
         <MobileMenuList>
           {menuItems.map((item) => (
-            <MobileMenuItem key={item.id} isscrolled={isScrolled.toString()}>
+            <MobileMenuItem key={item.id} $isScrolled={isScrolled}>
               <Link
                 href={`#${item.id}`}
                 onClick={(e) => handleLinkClick(e, item.id)}
@@ -128,6 +141,9 @@ export const Navbar = () => {
               </Link>
             </MobileMenuItem>
           ))}
+          <MobileMenuItem $isScrolled={isScrolled}>
+            <ThemeToggle />
+          </MobileMenuItem>
         </MobileMenuList>
       </StyledDrawer>
     </NavWrapper>

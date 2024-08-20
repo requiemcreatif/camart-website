@@ -1,3 +1,5 @@
+// components/Footer/styles.ts
+
 "use client";
 import { styled, Container, Box, Typography, IconButton } from "@mui/material";
 

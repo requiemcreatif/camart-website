@@ -1,10 +1,11 @@
+// components/YouTubeCarousel/styles.ts
 import { styled, Box, Typography, IconButton } from "@mui/material";
 
 export const CarouselWrapper = styled(Box)(({ theme }) => ({
-  backgroundColor: "#131313",
+  backgroundColor: theme.palette.background.paper,
   borderRadius: "12px",
   padding: "20px",
-  color: "#fff",
+  color: theme.palette.text.primary,
   margin: "20px auto",
   maxWidth: "100%",
   overflowX: "hidden",
@@ -12,6 +13,11 @@ export const CarouselWrapper = styled(Box)(({ theme }) => ({
     padding: "10px",
   },
 }));
+
+export const CarouselTitle = styled(Typography)({
+  marginBottom: "10px",
+  textAlign: "center",
+});
 
 export const VideoContainer = styled(Box)(({ theme }) => ({
   width: "560px",
@@ -26,7 +32,7 @@ export const VideoContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const NavigationButton = styled(IconButton)(({ theme }) => ({
-  color: "#fff",
+  color: theme.palette.text.primary,
   [theme.breakpoints.down("sm")]: {
     padding: "8px",
   },

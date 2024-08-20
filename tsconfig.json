@@ -28,7 +28,8 @@
     "**/*.tsx",
     "data/camartData.js",
     "utils/parseImageUrl.js",
-    "app/layout.js"
+    "app/layout.ts",
+    "components/providers/ThemeProvider/index.ts"
   ],
   "exclude": ["node_modules"]
 }

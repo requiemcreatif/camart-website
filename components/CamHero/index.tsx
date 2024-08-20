@@ -1,10 +1,10 @@
-//"use client";
+//components/CamHero/index.js
 import React from "react";
 import Image from "next/image";
 import { Header } from "../Header";
 import { HeroContainer, ImageContentCover } from "./styles";
 
-export const CamHero = () => {
+export const CamHero: React.FC = () => {
   return (
     <HeroContainer>
       <Image

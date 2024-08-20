@@ -8,12 +8,16 @@ import CookieDisclaimer from "../CookieDisclaimer";
 import NewsletterPopup from "../NewsletterPopup";
 import ArtistSection from "../ArtistSection";
 
-export const PageWrapper = () => {
+interface PageWrapperProps {
+  toggleTheme: () => void;
+}
+
+export const PageWrapper: React.FC<PageWrapperProps> = ({ toggleTheme }) => {
   const ContactForm = dynamic(() => import("../ContactForm"), { ssr: false });
   return (
     <Box>
       <NewsletterPopup />
-      <Navbar />
+      <Navbar toggleTheme={toggleTheme} />
       <Header />
       <ArtistSection />
       <ArticleContainer />

@@ -1,3 +1,5 @@
+// components/Footer/index.tsx
+
 import React from "react";
 import Link from "next/link";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -16,8 +18,8 @@ import {
   SocialIconButton,
 } from "./styles";
 
-export const Footer = () => {
-  const socialIcons = [
+export const Footer: React.FC = () => {
+  const socialIcons: { Icon: React.ElementType; url: string }[] = [
     { Icon: InstagramIcon, url: "#" },
     { Icon: FacebookIcon, url: "#" },
     { Icon: YouTubeIcon, url: "#" },
@@ -29,14 +31,11 @@ export const Footer = () => {
       <FooterWrapper>
         <FooterSocial>
           {socialIcons.map(({ Icon, url }, index) => (
-            <SocialIconButton
-              key={index}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon />
-            </SocialIconButton>
+            <a key={index} href={url} target="_blank" rel="noopener noreferrer">
+              <SocialIconButton>
+                <Icon />
+              </SocialIconButton>
+            </a>
           ))}
         </FooterSocial>
         <FooterTextContent>

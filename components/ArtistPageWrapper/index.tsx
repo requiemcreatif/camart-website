@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "../Navbar";
 import { Footer } from "@/components/Footer";
 import { styled } from "@mui/material/styles";
 
@@ -22,7 +22,11 @@ interface ArtistPageWrapperProps {
 const ArtistPageWrapper: React.FC<ArtistPageWrapperProps> = ({ children }) => {
   return (
     <PageWrapper>
-      <Navbar />
+      <Navbar
+        toggleTheme={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
       <MainContent>{children}</MainContent>
       <Footer />
     </PageWrapper>

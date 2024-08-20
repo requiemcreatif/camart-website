@@ -1,30 +1,33 @@
+// components/SpotifyPlayer/styles.ts
+
 import { styled, Box, IconButton } from "@mui/material";
 
 export const PlayerWrapper = styled(Box)<{ mode: "desktop" | "mobile" }>(
   ({ theme, mode }) => ({
-    backgroundColor: "rgba(19, 19, 19, 0.8)",
+    position: mode === "desktop" ? "absolute" : "relative",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? "rgba(0, 0, 0, 0.8)"
+        : "rgba(255, 255, 255, 0.8)",
     borderRadius: "12px 12px 0 0",
     padding: "10px",
-    color: "#fff",
+    color: theme.palette.text.primary,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
     backdropFilter: "blur(5px)",
+    height: mode === "desktop" ? "100px" : "auto",
     zIndex: 1,
     ...(mode === "desktop" && {
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      right: 0,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      height: "100px",
       [theme.breakpoints.down("md")]: {
         display: "none",
       },
     }),
     ...(mode === "mobile" && {
-      display: "flex",
       flexDirection: "column",
-      height: "auto",
       [theme.breakpoints.up("md")]: {
         display: "none",
       },
@@ -57,6 +60,6 @@ export const ControlsContainer = styled(Box)({
 });
 
 export const ControlButton = styled(IconButton)(({ theme }) => ({
-  color: "#fff",
+  color: theme.palette.text.primary,
   padding: "8px",
 }));

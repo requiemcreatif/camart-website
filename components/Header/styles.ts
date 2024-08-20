@@ -1,3 +1,5 @@
+// components/Header/styles.ts
+
 "use client";
 import {
   styled,
@@ -11,7 +13,7 @@ import {
 } from "@mui/material";
 
 export const HeaderWrapper = styled(Box)<BoxProps>`
-  margin-top: 30px;
+  //margin-top: 30px;
   position: relative;
   color: #fff;
   min-height: 40vh;
@@ -21,7 +23,7 @@ export const HeaderWrapper = styled(Box)<BoxProps>`
   background-color: #a91d3a;
 
   @media (min-width: 600px) {
-    margin-top: 20px;
+    //margin-top: 20px;
   }
 `;
 

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography, useTheme } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import Card from "./Card";
 import PostDetail from "./PostDetail";
@@ -8,6 +8,7 @@ import { usePosts } from "@/internal-api/postData";
 import { ImageContentWrapper, ImageContainer } from "./styles";
 
 export default function ArticleContainer() {
+  const theme = useTheme();
   const { data: posts, isLoading, isError, error } = usePosts();
   const [visibleCards, setVisibleCards] = useState(4);
   const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
@@ -31,7 +32,14 @@ export default function ArticleContainer() {
   return (
     <ImageContentWrapper id="menu-noticias">
       <Container sx={{ mt: 4, mb: 4 }}>
-        <Typography variant="h4" sx={{ mb: 4, fontWeight: 700 }}>
+        <Typography
+          variant="h4"
+          sx={{
+            mb: 4,
+            fontWeight: 700,
+            color: theme.palette.text.primary, // Ensure correct text color
+          }}
+        >
           ULTIMAS NOTICIAS
         </Typography>
         {selectedPostId && selectedPost ? (
@@ -67,7 +75,10 @@ export default function ArticleContainer() {
                     variant="contained"
                     color="primary"
                     onClick={loadMore}
-                    sx={{ backgroundColor: "#40679e", color: "#fff" }}
+                    sx={{
+                      backgroundColor: theme.palette.primary.main,
+                      color: theme.palette.primary.contrastText,
+                    }}
                   >
                     Ver Mas
                   </Button>
