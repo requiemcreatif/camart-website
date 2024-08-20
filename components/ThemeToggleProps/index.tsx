@@ -1,6 +1,4 @@
-// export default ThemeToggle;
 import React from "react";
-import { useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -8,8 +6,7 @@ import { SocialIconButton } from "../ArtistSection/styles";
 import { useThemeToggle } from "../ThemeContext";
 
 const ThemeToggle: React.FC = () => {
-  const theme = useTheme();
-  const toggleTheme = useThemeToggle();
+  const { mode, toggleTheme } = useThemeToggle();
 
   return (
     <SocialIconButton
@@ -18,14 +15,10 @@ const ThemeToggle: React.FC = () => {
     >
       <motion.div
         initial={false}
-        animate={{ rotate: theme.palette.mode === "dark" ? 180 : 0 }}
+        animate={{ rotate: mode === "dark" ? 180 : 0 }}
         transition={{ duration: 0.3 }}
       >
-        {theme.palette.mode === "dark" ? (
-          <LightModeOutlinedIcon />
-        ) : (
-          <DarkModeOutlinedIcon />
-        )}
+        {mode === "dark" ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
       </motion.div>
     </SocialIconButton>
   );
