@@ -1,3 +1,6 @@
+// components/PageWrapper.tsx
+"use client";
+
 import dynamic from "next/dynamic";
 import { Box } from "@mui/material";
 import { Navbar } from "../Navbar";
@@ -7,17 +10,16 @@ import ArticleContainer from "../ArticleContainer";
 import CookieDisclaimer from "../CookieDisclaimer";
 import NewsletterPopup from "../NewsletterPopup";
 import ArtistSection from "../ArtistSection";
+import { useThemeToggle } from "../ThemeContext";
 
-interface PageWrapperProps {
-  toggleTheme: () => void;
-}
-
-export const PageWrapper: React.FC<PageWrapperProps> = ({ toggleTheme }) => {
+export const PageWrapper: React.FC = () => {
+  const { toggleTheme } = useThemeToggle();
   const ContactForm = dynamic(() => import("../ContactForm"), { ssr: false });
+
   return (
     <Box>
       <NewsletterPopup />
-      <Navbar toggleTheme={toggleTheme} />
+      <Navbar />
       <Header />
       <ArtistSection />
       <ArticleContainer />

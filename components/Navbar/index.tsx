@@ -68,10 +68,10 @@ export const Navbar: React.FC = () => {
 
   const iconColor = isScrolled ? theme.palette.text.primary : "#ffffff";
 
-  const handleThemeToggle = () => {
-    console.log("Theme toggle clicked in Navbar");
-    toggleTheme();
-  };
+  // const handleThemeToggle = () => {
+  //   console.log("Theme toggle clicked in Navbar");
+  //   toggleTheme();
+  // };
 
   return (
     <NavWrapper $isScrolled={isScrolled}>

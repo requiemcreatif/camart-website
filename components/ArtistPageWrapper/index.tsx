@@ -23,9 +23,9 @@ const ArtistPageWrapper: React.FC<ArtistPageWrapperProps> = ({ children }) => {
   return (
     <PageWrapper>
       <Navbar
-        toggleTheme={function (): void {
-          throw new Error("Function not implemented.");
-        }}
+      // toggleTheme={function (): void {
+      //   throw new Error("Function not implemented.");
+      // }}
       />
       <MainContent>{children}</MainContent>
       <Footer />
