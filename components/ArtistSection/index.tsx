@@ -4,7 +4,11 @@ import { Container } from "@mui/material";
 import ArtistDetail from "./ArtistDetail";
 import ArtistList from "./ArtistList";
 import { useArtistData, useArtistDetail } from "@/internal-api/artistData";
-import { ArtistSectionWrapper, ArtistSectionTitle } from "./styles";
+import {
+  ArtistSectionWrapper,
+  ArtistSectionTitle,
+  ArtistWrapper,
+} from "./styles";
 
 const ArtistSection: React.FC = () => {
   const [selectedArtistId, setSelectedArtistId] = useState<number | null>(null);
@@ -32,13 +36,15 @@ const ArtistSection: React.FC = () => {
             <ArtistSectionTitle variant="h4">
               ARTISTAS CAMART
             </ArtistSectionTitle>
-            <ArtistList
-              artists={artists}
-              isLoading={isLoading}
-              isError={isError}
-              error={error}
-              onArtistClick={handleArtistClick}
-            />
+            <ArtistWrapper>
+              <ArtistList
+                artists={artists}
+                isLoading={isLoading}
+                isError={isError}
+                error={error}
+                onArtistClick={handleArtistClick}
+              />
+            </ArtistWrapper>
           </>
         )}
       </Container>

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Box, Typography, Button, Container } from "@mui/material";
+import { CookieContainer } from "./styles";
 
 const CookieDisclaimer = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -9,22 +10,7 @@ const CookieDisclaimer = () => {
   if (!isVisible) return null;
 
   return (
-    <Box
-      sx={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "#fff", // Red background
-        color: "#000",
-        padding: "16px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        zIndex: 10,
-      }}
-    >
+    <CookieContainer>
       <Container>
         <Typography variant="body2" sx={{ marginBottom: 2 }}>
           Nos apasiona la música. Para ayudarnos a compartir esa pasión, nos
@@ -89,7 +75,7 @@ const CookieDisclaimer = () => {
           Elegir cookies
         </Button>
       </Box>
-    </Box>
+    </CookieContainer>
   );
 };
 

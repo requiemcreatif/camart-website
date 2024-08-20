@@ -243,10 +243,10 @@ const ContactForm: React.FC = () => {
             <Button color="primary" size="small">
               Política de privacidad
             </Button>{" "}
-            |
+            {/* |
             <Button color="primary" size="small">
               No vender mi información personal
-            </Button>
+            </Button> */}
           </Box>
         </ContactFormWrapper>
         <Divider sx={{ mt: 3, backgroundColor: "#9f9fa4" }} />

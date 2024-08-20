@@ -12,6 +12,14 @@ export const ArtistSectionWrapper = styled(Box)`
   background-color: #000;
   padding: 40px 0;
 `;
+export const ArtistWrapper = styled(Box)`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
 
 export const ArtistSectionTitle = styled(Typography)`
   color: #fff;
@@ -20,7 +28,6 @@ export const ArtistSectionTitle = styled(Typography)`
 `;
 
 export const ArtistSectionCard = styled(Box)`
-  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.07);
@@ -32,6 +39,7 @@ export const ArtistSectionCard = styled(Box)`
 
   @media (min-width: 900px) {
     flex-direction: row;
+    min-height: 240px;
   }
 `;
 
@@ -96,8 +104,8 @@ export const BiographyText = styled(Box)`
 `;
 
 export const SpotifyPlayerContainer = styled(Box)(({ theme }) => ({
-  marginTop: theme.spacing(4),
+  marginTop: theme.spacing(2),
   [theme.breakpoints.down("md")]: {
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(2),
   },
 }));
