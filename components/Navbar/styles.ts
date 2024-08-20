@@ -10,7 +10,7 @@ interface ScrolledProps {
 
 export const NavWrapper = styled(Box)<ScrolledProps>(
   ({ theme, $isScrolled }) => ({
-    padding: "15px 0",
+    padding: "10px 0",
     backgroundColor: $isScrolled
       ? (theme as MuiTheme).palette.background.paper
       : "transparent",
@@ -26,7 +26,7 @@ export const NavbarContainer = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
+  //padding-bottom: 10px;
 `;
 
 export const DesktopMenu = styled("ul")`
@@ -36,6 +36,7 @@ export const DesktopMenu = styled("ul")`
   list-style: none;
   @media (min-width: 768px) {
     display: flex;
+    align-items: center;
   }
 `;
 
