@@ -8,17 +8,17 @@ export const PlayerWrapper = styled(Box)<{ mode: "desktop" | "mobile" }>(
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor:
-      theme.palette.mode === "dark"
-        ? "rgba(0, 0, 0, 0.8)"
-        : "rgba(255, 255, 255, 0.8)",
-    borderRadius: "12px 12px 0 0",
+    // backgroundColor:
+    //   theme.palette.mode === "dark"
+    //     ? "rgba(0, 0, 0, 0.8)"
+    //     : "rgba(255, 255, 255, 0.8)",
+    borderRadius: "12px ",
     padding: "10px",
     color: theme.palette.text.primary,
-    display: "flex",
+    //display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
-    backdropFilter: "blur(5px)",
+    //justifyContent: "space-between",
+    //backdropFilter: "blur(5px)",
     height: mode === "desktop" ? "100px" : "auto",
     zIndex: 1,
     ...(mode === "desktop" && {
