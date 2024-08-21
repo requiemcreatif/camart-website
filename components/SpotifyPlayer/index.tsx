@@ -65,9 +65,9 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ spotifyList, mode }) => {
         />
       </SongContainer>
       <SongInfo>
-        <Typography variant="body2" noWrap>
+        {/* <Typography variant="body2" noWrap>
           Track {currentSongIndex + 1}
-        </Typography>
+        </Typography> */}
       </SongInfo>
       <ControlsContainer>
         <ControlButton onClick={handlePrevious} size="small">
