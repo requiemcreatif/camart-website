@@ -25,10 +25,16 @@ export type Artist = {
   social: SocialMediaLinks;
   spotifyList: SpotifyList; // Add spotifyList property to Artist type
   youtubeList: { [key: string]: string }; // Add youtubeList property to Artist type
+  customOrder: number;
 };
 
-const fetchArtists = async (): Promise<Artist[]> => {
-  const response = await axios.get(`/api/artists`);
+const fetchArtists = async (
+  orderBy: string = "custom",
+  order: string = "ASC"
+): Promise<Artist[]> => {
+  const response = await axios.get(`/api/artists`, {
+    params: { orderby: orderBy, order: order },
+  });
   return response.data;
 };
 
@@ -37,10 +43,13 @@ export const fetchArtist = async (id: number): Promise<Artist> => {
   return response.data;
 };
 
-export const useArtistData = () => {
+export const useArtistData = (
+  orderBy: string = "custom",
+  order: string = "ASC"
+) => {
   return useQuery<Artist[], Error>({
-    queryKey: ["artists"],
-    queryFn: fetchArtists,
+    queryKey: ["artists", orderBy, order],
+    queryFn: () => fetchArtists(orderBy, order),
   });
 };
 
