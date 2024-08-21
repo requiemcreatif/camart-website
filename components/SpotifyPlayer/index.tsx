@@ -70,19 +70,19 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ spotifyList, mode }) => {
         </Typography> */}
       </SongInfo>
       <ControlsContainer>
-        <ControlButton onClick={handlePrevious} size="small">
+        {/* <ControlButton onClick={handlePrevious} size="small">
           <SkipPrevious fontSize="small" />
-        </ControlButton>
-        <ControlButton onClick={togglePlay} size="small">
+        </ControlButton> */}
+        {/* <ControlButton onClick={togglePlay} size="small">
           {isPlaying ? (
             <Pause fontSize="small" />
           ) : (
             <PlayArrow fontSize="small" />
           )}
-        </ControlButton>
-        <ControlButton onClick={handleNext} size="small">
+        </ControlButton> */}
+        {/* <ControlButton onClick={handleNext} size="small">
           <SkipNext fontSize="small" />
-        </ControlButton>
+        </ControlButton> */}
       </ControlsContainer>
     </PlayerWrapper>
   );
