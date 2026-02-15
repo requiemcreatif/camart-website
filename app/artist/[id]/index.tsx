@@ -149,7 +149,7 @@ export default function ArtistDetail({ id }: { id: string }) {
               src={heroImage}
               alt={artist.name}
               fill
-              className="object-cover"
+              className="object-cover object-[center_30%]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
             <div className="absolute bottom-8 left-0 right-0 mx-auto w-full max-w-[1280px] px-6 md:px-10">
