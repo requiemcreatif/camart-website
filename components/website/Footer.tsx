@@ -89,7 +89,7 @@ export function Footer() {
 
         <div className="mt-12 h-px bg-[#1A1A1A]" />
 
-        <div className="mt-8 flex flex-col justify-between gap-4 text-normal text-[#5F5F5F] md:flex-row md:text-normal">
+        <div className="mt-8 flex flex-col justify-between gap-4 text-sm text-[#5F5F5F] md:flex-row ">
           <p>© 2024 CamART. Todos los derechos reservados.</p>
           <Link href="#" className="hover:text-[#F2F2F2]">
             Política de Privacidad
