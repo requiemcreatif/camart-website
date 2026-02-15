@@ -2,6 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes mobileMenuFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobileMenuPanel {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobileMenuItem {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-mobile-menu-fade {
+  animation: mobileMenuFade 220ms ease-out both;
+}
+
+.animate-mobile-menu-panel {
+  animation: mobileMenuPanel 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.animate-mobile-menu-item {
+  animation: mobileMenuItem 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
 .wp-block-heading {
   text-align: center;
   font-size: 1.5em;
@@ -72,6 +115,10 @@
 @layer base {
   * {
     @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
   }
   body {
     @apply bg-background text-foreground;

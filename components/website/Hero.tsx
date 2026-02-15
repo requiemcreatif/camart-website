@@ -7,7 +7,7 @@ import { camartData } from "@/data/camartData";
 
 export function Hero() {
   return (
-    <section id="home" className="relative min-h-[760px] overflow-hidden">
+    <section id="home" className="relative min-h-[760px] scroll-mt-[84px] overflow-hidden">
       <Image
         src="/images/cam204.jpg"
         alt="Cam Art hero background"
@@ -25,13 +25,13 @@ export function Hero() {
             </p>
           </div>
 
-          <h1 className="mx-auto max-w-4xl text-5xl font-extrabold leading-[0.95] tracking-[-0.02em] text-[#F2F2F2] md:text-8xl">
+          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold leading-[0.95] tracking-[-0.02em] text-[#F2F2F2] md:text-6xl">
             Donde la Música
             <br />
             Encuentra su Escenario
           </h1>
 
-          <p className="mx-auto mt-10 max-w-4xl text-base leading-relaxed text-[#B3B3B3] md:text-xl md:leading-relaxed">
+          <p className="mx-auto mt-10 max-w-4xl text-base font-thin leading-relaxed text-[#B3B3B3] md:text-xl md:leading-relaxed">
             {camartData.introText}
           </p>
 
