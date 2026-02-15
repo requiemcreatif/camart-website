@@ -18,6 +18,7 @@ import {
 import { parseImageUrl } from "@/utils/parseImageUrl";
 import { camartData } from "@/data/camartData";
 import { Navbar } from "@/components/website/Navbar";
+import { Hero } from "@/components/website/Hero";
 
 type Artist = {
   id: number;
@@ -96,40 +97,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-background via-background to-muted/60 text-foreground">
       <Navbar />
-
-      <section id="home" className="relative overflow-hidden border-b border-border/70">
-        <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
-        <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-20 md:grid-cols-2 md:items-center">
-          <div className="space-y-5">
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
-              Booking & Management
-            </p>
-            <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
-              CAM ART FESTIVAL
-            </h1>
-            <p className="max-w-xl text-base text-muted-foreground md:text-lg">
-              {camartData.introText}
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild>
-                <a href="#artists">Explorar artistas</a>
-              </Button>
-              <Button variant="secondary" asChild>
-                <a href="#contact">Contratar ahora</a>
-              </Button>
-            </div>
-          </div>
-          <div className="relative h-[360px] overflow-hidden rounded-2xl border border-border/70">
-            <Image
-              src="/images/cam459.jpg"
-              alt="Cam Art Festival"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       <section id="artists" className="mx-auto w-full max-w-6xl px-4 py-16">
         <div className="mb-8 flex items-end justify-between">
