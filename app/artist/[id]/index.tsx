@@ -1,30 +1,39 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import HTMLReactParser from "html-react-parser";
-import axios from "axios";
-import { Artist } from "@/internal-api/artistData";
-import { CircularProgress, Grid, IconButton } from "@mui/material";
-import Image from "next/image";
+import { ArrowLeft, Facebook, Instagram, Music2, Twitter } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { parseImageUrl } from "@/utils/parseImageUrl";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import AudiotrackIcon from "@mui/icons-material/Audiotrack";
-import ArtistPageWrapper from "@/components/ArtistPageWrapper";
-import {
-  StyledContainer,
-  ArtistPaper,
-  ImageContainer,
-  ArtistName,
-  SocialIconsContainer,
-  BiographyText,
-} from "./styles";
+
+type Artist = {
+  id: number;
+  name: string;
+  fullBio: string;
+  imageUrl: string | null;
+  social: {
+    instagram?: string;
+    facebook?: string;
+    twitter?: string;
+    spotify?: string;
+  };
+};
 
 const fetchArtist = async (id: string): Promise<Artist> => {
   const response = await axios.get(`/api/artists/${id}`);
   return response.data;
 };
+
+const socialMap = [
+  { key: "instagram", icon: Instagram, label: "Instagram" },
+  { key: "facebook", icon: Facebook, label: "Facebook" },
+  { key: "twitter", icon: Twitter, label: "X" },
+  { key: "spotify", icon: Music2, label: "Spotify" },
+] as const;
 
 export default function ArtistDetail({ id }: { id: string }) {
   const {
@@ -36,78 +45,73 @@ export default function ArtistDetail({ id }: { id: string }) {
     queryFn: () => fetchArtist(id),
   });
 
-  if (isLoading) return <CircularProgress />;
-  if (isError) return <div>Error loading artist</div>;
-  if (!artist) return <div>Artist not found</div>;
+  if (isLoading) {
+    return (
+      <main className="mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center px-4 py-16">
+        <p className="text-sm text-muted-foreground">Cargando artista...</p>
+      </main>
+    );
+  }
+
+  if (isError || !artist) {
+    return (
+      <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-center gap-4 px-4 py-16">
+        <p className="text-sm text-muted-foreground">
+          No pudimos cargar la informacion del artista.
+        </p>
+        <Button variant="outline" asChild>
+          <Link href="/">Volver al inicio</Link>
+        </Button>
+      </main>
+    );
+  }
 
   return (
-    <ArtistPageWrapper>
-      <StyledContainer>
-        <ArtistPaper>
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={4}>
-              <ImageContainer>
-                {artist.imageUrl && (
-                  <Image
-                    src={parseImageUrl(artist.imageUrl)}
-                    alt={artist.name}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                )}
-              </ImageContainer>
-            </Grid>
-            <Grid item xs={12} md={8}>
-              <ArtistName variant="h3">{artist.name}</ArtistName>
-              <SocialIconsContainer>
-                {artist.social.instagram && (
-                  <IconButton
-                    color="primary"
-                    href={artist.social.instagram}
+    <main className="mx-auto w-full max-w-6xl px-4 py-10">
+      <Button variant="ghost" asChild className="mb-6">
+        <Link href="/" className="inline-flex items-center gap-2">
+          <ArrowLeft className="h-4 w-4" />
+          Volver
+        </Link>
+      </Button>
+
+      <Card className="overflow-hidden border-border/70">
+        <div className="grid gap-8 p-6 md:grid-cols-[320px_1fr] md:p-8">
+          <div className="relative h-[320px] overflow-hidden rounded-xl">
+            <Image
+              src={parseImageUrl(artist.imageUrl) || "/images/cam415.jpg"}
+              alt={artist.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <CardContent className="p-0">
+            <h1 className="mb-4 text-3xl font-bold">{artist.name}</h1>
+            <div className="mb-5 flex items-center gap-2">
+              {socialMap.map((item) => {
+                const href = artist.social?.[item.key];
+                if (!href) return null;
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.key}
+                    href={href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="rounded-md border border-border p-2 transition hover:bg-muted"
+                    aria-label={item.label}
                   >
-                    <InstagramIcon />
-                  </IconButton>
-                )}
-                {artist.social.facebook && (
-                  <IconButton
-                    color="primary"
-                    href={artist.social.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FacebookIcon />
-                  </IconButton>
-                )}
-                {artist.social.twitter && (
-                  <IconButton
-                    color="primary"
-                    href={artist.social.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <TwitterIcon />
-                  </IconButton>
-                )}
-                {artist.social.spotify && (
-                  <IconButton
-                    color="primary"
-                    href={artist.social.spotify}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <AudiotrackIcon />
-                  </IconButton>
-                )}
-              </SocialIconsContainer>
-              <BiographyText variant="body1">
-                {HTMLReactParser(artist.fullBio)}
-              </BiographyText>
-            </Grid>
-          </Grid>
-        </ArtistPaper>
-      </StyledContainer>
-    </ArtistPageWrapper>
+                    <Icon className="h-4 w-4" />
+                  </a>
+                );
+              })}
+            </div>
+            <article className="prose prose-sm max-w-none dark:prose-invert">
+              {HTMLReactParser(artist.fullBio || "")}
+            </article>
+          </CardContent>
+        </div>
+      </Card>
+    </main>
   );
 }

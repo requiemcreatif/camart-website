@@ -1,4 +1,5 @@
-// components/ThemeContext.tsx
+"use client";
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 type ThemeMode = "light" | "dark";
@@ -17,10 +18,14 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const savedMode = localStorage.getItem("themeMode") as ThemeMode;
-    if (savedMode) {
+    if (savedMode === "light" || savedMode === "dark") {
       setMode(savedMode);
     }
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", mode === "dark");
+  }, [mode]);
 
   const toggleTheme = () => {
     setMode((prevMode) => {

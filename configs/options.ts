@@ -1,3 +1,3 @@
 export const options = {
-  baseUrl: "https://www.backend.camart.es",
+  baseUrl: "https://backend.camart.es",
 };

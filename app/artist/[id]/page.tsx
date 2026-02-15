@@ -2,6 +2,11 @@
 
 import ArtistDetail from ".";
 
-export default function ArtistPage({ params }: { params: { id: string } }) {
-  return <ArtistDetail id={params.id} />;
+export default async function ArtistPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  return <ArtistDetail id={id} />;
 }
