@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { parseImageUrl } from "@/utils/parseImageUrl";
 import { Navbar } from "@/components/website/Navbar";
 import { Footer } from "@/components/website/Footer";
+import SpotifyPlayer from "@/components/SpotifyPlayer";
 
 type Artist = {
   id: number;
@@ -23,6 +24,7 @@ type Artist = {
   shortBio?: string;
   fullBio: string;
   imageUrl: string | null;
+  spotifyList?: Record<string, string>;
   youtubeList?: Record<string, string>;
   social: {
     instagram?: string;
@@ -197,12 +199,7 @@ export default function ArtistDetail({ id }: { id: string }) {
                   Hip-Hop / Rap Andaluz
                 </p>
               </div>
-              {/* <div className="border border-[#232323] bg-[#151515] p-4">
-                <p className="mb-2 text-[10px] tracking-[0.22em] text-[#6F6F6F]">
-                  EXPERIENCIA
-                </p>
-                <p className="text-[14px] text-[#D7D7D7]">+10 Años</p>
-              </div> */}
+
               <div className="border border-[#232323] bg-[#151515] p-4">
                 <p className="mb-2 text-[10px] tracking-[0.22em] text-[#6F6F6F]">
                   REDES
@@ -230,6 +227,19 @@ export default function ArtistDetail({ id }: { id: string }) {
             </aside>
           </div>
         </section>
+
+        {artist.spotifyList && Object.keys(artist.spotifyList).length > 0 && (
+          <section className="pb-14">
+            <div className="mx-auto w-full max-w-[1280px] px-6 md:px-10">
+              <p className="mb-3 text-[11px] tracking-[0.24em] text-[#6F6F6F]">
+                SPOTIFY
+              </p>
+              <div className="overflow-hidden border border-[#1F1F1F] bg-[#111111] p-4 md:p-5">
+                <SpotifyPlayer spotifyList={artist.spotifyList} mode="desktop" />
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="pb-14">
           <div className="mx-auto w-full max-w-[1280px] px-6 md:px-10">

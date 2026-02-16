@@ -7,7 +7,10 @@ import { camartData } from "@/data/camartData";
 
 export function Hero() {
   return (
-    <section id="home" className="relative min-h-[760px] scroll-mt-[84px] overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-[760px] scroll-mt-[84px] overflow-hidden"
+    >
       <Image
         src="/images/cam204.jpg"
         alt="Cam Art hero background"
@@ -15,21 +18,21 @@ export function Hero() {
         priority
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-[#0A0A0A]/70" />
+      <div className="absolute inset-0 bg-[#0A0A0A]/40" />
 
       <div className="relative mx-auto flex min-h-[760px] w-full max-w-[1280px] items-center justify-center px-6 py-14 md:px-10">
-        <div className="w-full border border-[#1A1A1A] bg-[#0A0A0A]/92 px-6 py-12 text-center md:px-16 md:py-16">
+        <div className="w-full bg-[#0A0A0A]/50 px-6 py-12 text-center md:px-16 md:py-16">
           <div className="mx-auto mb-10 inline-block border border-[#3A3A3A] px-5 py-2">
             <p className="text-[11px] tracking-[0.28em] text-[#D6D6D6]">
               BOOKING &amp; MANAGEMENT
             </p>
           </div>
 
-          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold leading-[0.95] tracking-[-0.02em] text-[#F2F2F2] md:text-6xl">
+          {/* <h1 className="mx-auto max-w-4xl text-4xl font-extrabold leading-[0.95] tracking-[-0.02em] text-[#F2F2F2] md:text-6xl">
             Donde la Música
             <br />
             Encuentra su Escenario
-          </h1>
+          </h1> */}
 
           <p className="mx-auto mt-10 max-w-4xl text-base font-thin leading-relaxed text-[#B3B3B3] md:text-xl md:leading-relaxed">
             {camartData.introText}

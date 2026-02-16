@@ -4,34 +4,14 @@ import { styled, Box, IconButton } from "@mui/material";
 
 export const PlayerWrapper = styled(Box)<{ mode: "desktop" | "mobile" }>(
   ({ theme, mode }) => ({
-    position: mode === "desktop" ? "absolute" : "relative",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    // backgroundColor:
-    //   theme.palette.mode === "dark"
-    //     ? "rgba(0, 0, 0, 0.8)"
-    //     : "rgba(255, 255, 255, 0.8)",
-    borderRadius: "12px ",
-    padding: "10px",
+    position: "relative",
+    width: "100%",
+    borderRadius: "0",
+    padding: 0,
     color: theme.palette.text.primary,
-    //display: "flex",
     alignItems: "center",
-    //justifyContent: "space-between",
-    //backdropFilter: "blur(5px)",
-    height: mode === "desktop" ? "100px" : "auto",
+    height: mode === "desktop" ? "152px" : "80px",
     zIndex: 1,
-    ...(mode === "desktop" && {
-      [theme.breakpoints.down("md")]: {
-        display: "none",
-      },
-    }),
-    ...(mode === "mobile" && {
-      flexDirection: "column",
-      [theme.breakpoints.up("md")]: {
-        display: "none",
-      },
-    }),
   })
 );
 
@@ -39,7 +19,7 @@ export const SongContainer = styled(Box)<{ mode: "desktop" | "mobile" }>(
   ({ mode }) => ({
     flex: "1 1 auto",
     height: mode === "desktop" ? "100%" : "80px",
-    marginBottom: mode === "mobile" ? "10px" : 0,
+    marginBottom: 0,
   })
 );
 

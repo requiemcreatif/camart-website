@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Box, IconButton, Typography } from "@mui/material";
-import { PlayArrow, Pause, SkipPrevious, SkipNext } from "@mui/icons-material";
-import {
-  PlayerWrapper,
-  SongContainer,
-  ControlsContainer,
-  ControlButton,
-  SongInfo,
-} from "./styles";
+import { Box } from "@mui/material";
+
+import { PlayerWrapper, SongContainer, SongInfo } from "./styles";
 
 interface SpotifyList {
   [key: string]: string;
@@ -31,22 +25,6 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ spotifyList, mode }) => {
     setEmbedUrls(urls);
   }, [spotifyList]);
 
-  const handlePrevious = () => {
-    setCurrentSongIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : embedUrls.length - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentSongIndex((prevIndex) =>
-      prevIndex < embedUrls.length - 1 ? prevIndex + 1 : 0
-    );
-  };
-
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
-
   if (embedUrls.length === 0) {
     return null;
   }
@@ -64,26 +42,7 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ spotifyList, mode }) => {
           sx={{ borderRadius: "12px" }}
         />
       </SongContainer>
-      <SongInfo>
-        {/* <Typography variant="body2" noWrap>
-          Track {currentSongIndex + 1}
-        </Typography> */}
-      </SongInfo>
-      {/* <ControlsContainer>
-        <ControlButton onClick={handlePrevious} size="small">
-          <SkipPrevious fontSize="small" />
-        </ControlButton>
-        <ControlButton onClick={togglePlay} size="small">
-          {isPlaying ? (
-            <Pause fontSize="small" />
-          ) : (
-            <PlayArrow fontSize="small" />
-          )}
-        </ControlButton>
-        <ControlButton onClick={handleNext} size="small">
-          <SkipNext fontSize="small" />
-        </ControlButton>
-      </ControlsContainer> */}
+      <SongInfo></SongInfo>
     </PlayerWrapper>
   );
 };
