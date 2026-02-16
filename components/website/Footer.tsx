@@ -82,7 +82,6 @@ export function Footer() {
             </p>
             <div className="space-y-3 text-normal text-[#7A7A7A] md:text-normal">
               <p className="text-sm">info@camart.es</p>
-              <p className="text-sm">+34 600 000 000</p>
             </div>
           </div>
         </div>
