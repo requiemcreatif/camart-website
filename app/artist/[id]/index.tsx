@@ -50,19 +50,32 @@ function formatBioHtml(rawBio?: string) {
   if (!source) return [];
 
   // Normalize mixed backend HTML/text into plain paragraphs we can style consistently.
-  const text = source
+  // Two-pass decode handles cases like &amp;#8220; coming from some WP responses.
+  let text = source
     .replace(/<\/p\s*>/gi, "\n\n")
     .replace(/<br\s*\/?>/gi, "\n")
     .replace(/<\/li\s*>/gi, "\n")
     .replace(/<li[^>]*>/gi, "• ")
     .replace(/<\/h[1-6]\s*>/gi, "\n\n")
     .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;|&apos;/gi, "'")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">");
+    .replace(/&nbsp;/gi, " ");
+
+  for (let i = 0; i < 2; i += 1) {
+    text = text
+      .replace(/&#(\d+);/g, (match, code) => {
+        const value = Number(code);
+        return Number.isFinite(value) ? String.fromCodePoint(value) : match;
+      })
+      .replace(/&#x([0-9a-fA-F]+);/g, (match, hex) => {
+        const value = parseInt(hex, 16);
+        return Number.isFinite(value) ? String.fromCodePoint(value) : match;
+      })
+      .replace(/&quot;/gi, '"')
+      .replace(/&#39;|&apos;/gi, "'")
+      .replace(/&amp;/gi, "&")
+      .replace(/&lt;/gi, "<")
+      .replace(/&gt;/gi, ">");
+  }
 
   return text
     .split(/\n{2,}/)

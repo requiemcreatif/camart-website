@@ -56,7 +56,7 @@ export function Navbar() {
           type="button"
           onClick={() => setIsMobileMenuOpen(true)}
           aria-label="Abrir menú"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#2E2E2E] text-[#DCDCDC] transition hover:bg-[#171717] md:hidden"
+          className="motion-button inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#2E2E2E] text-[#DCDCDC] transition hover:bg-[#171717] md:hidden"
         >
           <Menu className="h-5 w-5" />
         </button>
@@ -84,7 +84,7 @@ export function Navbar() {
           <Button
             type="button"
             onClick={() => scrollToSection("contact")}
-            className="h-9 rounded-none bg-[#F2F2F2] px-5 text-sm font-semibold text-[#0A0A0A] hover:bg-[#FFFFFF]"
+            className="motion-button h-9 rounded-none bg-[#F2F2F2] px-5 text-sm font-semibold text-[#0A0A0A] hover:bg-[#FFFFFF]"
           >
             Contáctanos
           </Button>
@@ -106,7 +106,7 @@ export function Navbar() {
                 type="button"
                 onClick={() => setIsMobileMenuOpen(false)}
                 aria-label="Cerrar menú"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#2E2E2E] text-[#A6A6A6] transition hover:bg-[#171717] hover:text-[#E5E5E5]"
+                className="motion-button inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#2E2E2E] text-[#A6A6A6] transition hover:bg-[#171717] hover:text-[#E5E5E5]"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -136,7 +136,7 @@ export function Navbar() {
               <Button
                 type="button"
                 onClick={() => scrollToSection("contact")}
-                className="h-14 w-full rounded-none bg-[#F2F2F2] text-lg font-semibold text-[#0A0A0A] hover:bg-white"
+                className="motion-button h-14 w-full rounded-none bg-[#F2F2F2] text-lg font-semibold text-[#0A0A0A] hover:bg-white"
               >
                 Contáctanos <ArrowRight className="ml-2 h-5 w-5" />
               </Button>

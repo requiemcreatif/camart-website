@@ -18,7 +18,7 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#0A0A0A] pb-10 pt-16">
+    <footer className="bg-[#0A0A0A] pb-10 pt-16 animate-reveal-up">
       <div className="mx-auto container w-full px-6 md:px-10">
         <div className="grid gap-12 md:grid-cols-[2.2fr_1fr_1fr_1fr]">
           <div>
@@ -33,14 +33,22 @@ export function Footer() {
               <a
                 href="#"
                 aria-label="Instagram"
-                className="hover:text-[#F2F2F2]"
+                className="motion-button hover:text-[#F2F2F2]"
               >
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="YouTube" className="hover:text-[#F2F2F2]">
+              <a
+                href="#"
+                aria-label="YouTube"
+                className="motion-button hover:text-[#F2F2F2]"
+              >
                 <Youtube className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Music" className="hover:text-[#F2F2F2]">
+              <a
+                href="#"
+                aria-label="Music"
+                className="motion-button hover:text-[#F2F2F2]"
+              >
                 <Music2 className="h-5 w-5" />
               </a>
             </div>

@@ -11,10 +11,16 @@ type ContactSectionProps = {
 
 export function ContactSection({ formState, onSubmit }: ContactSectionProps) {
   return (
-    <section id="contact" className="scroll-mt-[84px] bg-[#0A0A0A] py-20">
+    <section
+      id="contact"
+      className="scroll-mt-[84px] bg-[#0A0A0A] py-20 animate-reveal-up"
+    >
       <div className="mx-auto container w-full px-6 md:px-10">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.6fr]">
-          <div className="space-y-8">
+          <div
+            className="space-y-8 animate-reveal-up"
+            style={{ animationDelay: "70ms" }}
+          >
             <div>
               <p className="mb-3 text-[11px] tracking-[0.24em] text-[#555555]">
                 CONTACTO
@@ -32,18 +38,18 @@ export function ContactSection({ formState, onSubmit }: ContactSectionProps) {
             </p>
 
             <div className="space-y-4 text-[#EAEAEA]">
-              <p className="flex items-center gap-3 text-[18px]">
-                <Mail className="h-5 w-5" />
+              <p className="flex items-center gap-3 text-sm">
+                <Mail className="h-4 w-4" />
                 info@camart.es
-              </p>
-              <p className="flex items-center gap-3 text-[18px]">
-                <Phone className="h-5 w-5" />
-                +34 600 000 000
               </p>
             </div>
           </div>
 
-          <form className="space-y-5" onSubmit={onSubmit}>
+          <form
+            className="space-y-5 animate-reveal-up"
+            style={{ animationDelay: "130ms" }}
+            onSubmit={onSubmit}
+          >
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-2 block text-[15px] text-[#F2F2F2]">
@@ -106,19 +112,19 @@ export function ContactSection({ formState, onSubmit }: ContactSectionProps) {
             <button
               type="submit"
               disabled={formState === "sending"}
-              className="flex h-12 w-full items-center justify-center gap-3 rounded-none bg-[#F2F2F2] px-6 text-base font-semibold text-[#0A0A0A] transition hover:bg-white disabled:opacity-70 md:text-lg"
+              className="motion-button flex h-12 w-full items-center justify-center gap-3 rounded-none bg-[#F2F2F2] px-6 text-base font-semibold text-[#0A0A0A] transition hover:bg-white disabled:opacity-70 md:text-lg"
             >
               {formState === "sending" ? "Enviando..." : "Enviar Mensaje"}
               <Send className="h-4 w-4" />
             </button>
 
             {formState === "success" && (
-              <p className="text-sm text-green-400">
+              <p className="animate-fade-in text-sm text-green-400">
                 Mensaje enviado correctamente.
               </p>
             )}
             {formState === "error" && (
-              <p className="text-sm text-red-400">
+              <p className="animate-fade-in text-sm text-red-400">
                 No se pudo enviar el mensaje. Inténtalo de nuevo.
               </p>
             )}
